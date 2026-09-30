@@ -1,0 +1,23 @@
+# secrets
+.env
+.env.*
+!.env.example
+
+# python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# node
+node_modules/
+frontend/dist/
+
+# runtime state (rebuilt by make targets)
+backend/var/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/

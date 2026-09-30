@@ -1,0 +1,14 @@
+# USD per million tokens, list price. Longest matching prefix of the served model id wins.
+# A model with no entry is traced with cost = null (shown as "unpriced"), never guessed.
+# Sources checked 2026-09-30:
+#   Anthropic  https://platform.claude.com/docs/en/about-claude/pricing
+#   Google     https://ai.google.dev/gemini-api/docs/pricing
+#   OpenAI     https://developers.openai.com/api/docs/pricing
+models:
+  claude-opus-5-5: {input: 4.00, output: 20.00}
+  claude-haiku-4-5: {input: 1.00, output: 5.00}
+  # Gemini bills thinking tokens as output. Prompts over 200k tokens re-rate the whole request.
+  gemini-3.1-pro: {input: 2.00, output: 12.00, over_200k: {input: 4.00, output: 18.00}}
+  # Standard rate. OpenAI lists a promotional $4/$20 through 2026-11-21; we trace the standard
+  # rate so the Run inspector never understates spend.
+  gpt-5.6-sol: {input: 5.00, output: 30.00}

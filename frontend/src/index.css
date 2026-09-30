@@ -1,0 +1,54 @@
+@import 'tailwindcss';
+@import './design/tokens.css';
+
+/* Tailwind's theme reads the design tokens; components never hardcode a hex. */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+@theme inline {
+  --color-surface-0: var(--surface-0);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-faint: var(--ink-faint);
+  --color-on-accent: var(--on-accent);
+  --color-accent: var(--accent);
+  --color-accent-bg: var(--accent-bg);
+  --color-accent-ink: var(--accent-ink);
+  --color-warning-bg: var(--warning-bg);
+  --color-warning-ink: var(--warning-ink);
+  --color-warning-border: var(--warning-border);
+  --color-danger-bg: var(--danger-bg);
+  --color-danger-ink: var(--danger-ink);
+  --color-success-bg: var(--success-bg);
+  --color-success-ink: var(--success-ink);
+  --color-info-bg: var(--info-bg);
+  --color-info-ink: var(--info-ink);
+}
+
+/* These tokens already use Tailwind's own variable names, so they are registered for
+   utilities (text-meta, rounded-card, font-mono, shadow-popover) without being re-emitted. */
+@theme reference inline {
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  --text-meta: var(--text-meta);
+  --text-table: var(--text-table);
+  --text-body: var(--text-body);
+  --text-emphasis: var(--text-emphasis);
+  --text-section: var(--text-section);
+  --text-title: var(--text-title);
+
+  --radius-control: var(--radius-control);
+  --radius-card: var(--radius-card);
+  --radius-panel: var(--radius-panel);
+
+  --shadow-popover: var(--shadow-popover);
+}
+
+body {
+  margin: 0;
+}

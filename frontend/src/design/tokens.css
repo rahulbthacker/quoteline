@@ -1,0 +1,90 @@
+/* Quoteline design tokens. Single source of truth for colour, type and spacing.
+   Light is the default; dark is applied by OS preference or by data-theme="dark".
+   Every text/background pair below meets 4.5:1 or better. */
+
+:root {
+  color-scheme: light;
+
+  --surface-0: #F6F4EF;   /* page */
+  --surface-1: #FFFFFF;   /* cards, table body */
+  --surface-2: #F0EDE6;   /* table header, quiet panels */
+  --surface-3: #E7E3DA;   /* hover, chips */
+  --border: #DBD6CA;
+  --border-strong: #BDB6A6;
+
+  --ink: #1C1B18;
+  --ink-muted: #5B584F;
+  --ink-faint: #7F7A6E;
+  --on-accent: #FFFFFF;
+
+  --accent: #BF4A1F;
+  --accent-bg: #FBEAE2;
+  --accent-ink: #8F3413;
+
+  --warning-bg: #FBF0D3;  --warning-ink: #6F4708;  --warning-border: #E5C46F;
+  --danger-bg:  #FBE4E1;  --danger-ink:  #932A22;
+  --success-bg: #E3F0E4;  --success-ink: #22572C;
+  --info-bg:    #E2EBF7;  --info-ink:    #244670;
+
+  /* cell states: the core of the system */
+  --cell-confident-bg: var(--surface-1);   --cell-confident-ink: var(--ink);
+  --cell-lowest-bg:    var(--success-bg);  --cell-lowest-ink:    var(--success-ink);
+  --cell-review-bg:    var(--warning-bg);  --cell-review-ink:    var(--warning-ink);
+  --cell-missing-bg:   repeating-linear-gradient(135deg, #EDEAE2 0 6px, #F6F4EF 6px 12px);
+  --cell-missing-ink:  var(--ink-faint);
+  --cell-override-underline: var(--accent);
+
+  --font-sans: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --text-meta: 11px;  --text-table: 12px;  --text-body: 13px;
+  --text-emphasis: 14px;  --text-section: 16px;  --text-title: 20px;
+
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 20px; --space-6: 24px; --space-8: 32px;
+
+  --radius-control: 6px; --radius-card: 8px; --radius-panel: 12px;
+  --row-compact: 34px;   /* grid only */
+  --row-comfortable: 40px;
+
+  --shadow-popover: 0 12px 32px rgba(0, 0, 0, 0.18);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --surface-0: #141311; --surface-1: #1D1B18; --surface-2: #25221E; --surface-3: #2F2B26;
+    --border: #3B3731; --border-strong: #54503F;
+    --ink: #F1EEE7; --ink-muted: #B3AEA2; --ink-faint: #8B857A; --on-accent: #141311;
+    --accent: #F28454; --accent-bg: #3B2418; --accent-ink: #F7A986;
+    --warning-bg: #3A2D10; --warning-ink: #F1C46A; --warning-border: #7A5A17;
+    --danger-bg: #41201C; --danger-ink: #F29C90;
+    --success-bg: #1C3322; --success-ink: #9AD3A4;
+    --info-bg: #1A2A42; --info-ink: #9FBFEC;
+    --cell-missing-bg: repeating-linear-gradient(135deg, #2A2722 0 6px, #1D1B18 6px 12px);
+    --shadow-popover: 0 12px 32px rgba(0, 0, 0, 0.5);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --surface-0: #141311; --surface-1: #1D1B18; --surface-2: #25221E; --surface-3: #2F2B26;
+  --border: #3B3731; --border-strong: #54503F;
+  --ink: #F1EEE7; --ink-muted: #B3AEA2; --ink-faint: #8B857A; --on-accent: #141311;
+  --accent: #F28454; --accent-bg: #3B2418; --accent-ink: #F7A986;
+  --warning-bg: #3A2D10; --warning-ink: #F1C46A; --warning-border: #7A5A17;
+  --danger-bg: #41201C; --danger-ink: #F29C90;
+  --success-bg: #1C3322; --success-ink: #9AD3A4;
+  --info-bg: #1A2A42; --info-ink: #9FBFEC;
+  --cell-missing-bg: repeating-linear-gradient(135deg, #2A2722 0 6px, #1D1B18 6px 12px);
+  --shadow-popover: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+html, body {
+  background: var(--surface-0);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: 1.45;
+  font-variant-numeric: tabular-nums;
+}
