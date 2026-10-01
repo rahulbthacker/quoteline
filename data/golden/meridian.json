@@ -28,7 +28,7 @@
       "question_id": "Q2",
       "mandatory": true,
       "expected": "pass",
-      "evidence": "All inks are water-based flexo inks compliant with EuPIA GMP and IS 15495; adhesives are starch based. MSDS available on request.",
+      "evidence": "All inks are water-based flexo inks compliant with EuPIA GMP and IS 15495. MSDS available on request.",
       "locator": "Cover!B12"
     },
     {

@@ -245,3 +245,38 @@ def test_expected_flags_cover_the_briefs_ugly_edges():
     assert {"unit_ambiguity", "currency_mismatch", "not_quoted"} <= kinds["kaveri"]
     assert {"ocr_disagreement", "not_quoted"} <= kinds["northbox"]
     assert {"carry_forward_unresolved", "missing_freight"} <= kinds["anand"]
+
+
+def test_source_check_accepts_real_quotes_in_any_shape_and_rejects_invented_ones():
+    """The provenance check must survive how models format a table row, and still catch a
+    number that is not in the file."""
+    from app.agents.extractor import verify_source
+    from app.services import parsers
+
+    pdf = parsers.parse("q.pdf", reply_path("sribalaji").read_bytes())
+    l04 = next(row for row in golden("sribalaji")["lines"] if row["line_id"] == "L04")
+    value = l04["raw_value"]
+    shapes = [
+        f"4 | 7 Ply export carton 650 x 450 x 450, 180 GSM | 11,000 | pcs | {l04['raw_text']} | 11,91,520.00",
+        f"4 7 Ply export carton 650 x 450 x 450, 180 GSM 11,000 pcs {l04['raw_text']}",
+        "7 Ply export carton 650 x 450 x 450, 180 GSM",  # description only, number implied
+    ]
+    for snippet in shapes:
+        assert verify_source(pdf, "page 1, row 4", snippet, value) is True, snippet
+    assert verify_source(pdf, "page 1, row 4", shapes[0], value + 1000) is False  # wrong number
+    assert verify_source(pdf, "page 1", "9 Ply titanium crate 900 x 900 x 900", value) is False
+
+    docx = parsers.parse("k.docx", reply_path("kaveri").read_bytes())
+    assert (
+        verify_source(docx, "paragraph 7", "at USD 0.65 per box, packed 100 per bundle", 0.65)
+        is True
+    )
+    assert verify_source(docx, "paragraph 7", "at USD 0.56 per box", 0.56) is False
+    declined = "We regret that we cannot offer the honeycomb pallet pad 1200x1000x20"
+    assert verify_source(docx, "paragraph 13", declined, None) is True
+    assert verify_source(docx, "paragraph 13", "We cannot offer the corner post", None) is False
+
+    eml = parsers.parse("a.eml", reply_path("anand").read_bytes())
+    assert verify_source(eml, "email body, line 1", "38 for the 3-ply", 38.0) is True
+    photo = parsers.parse("n.jpg", reply_path("northbox").read_bytes())
+    assert verify_source(photo, "row 5", "anything", 3935.0) is None  # no text layer to check

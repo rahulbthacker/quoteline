@@ -5,7 +5,7 @@
     "files": [
       {
         "path": "data/replies/meridian/Meridian_Offer_RFX-0147.xlsx",
-        "sha256": "a048181cff08019b7a2223ebdde3c9d4903878c0726fcc8bf03fef06c132370d"
+        "sha256": "6f4ac7b0f4178cd35e81ecf804ac65471505f532c42e9c0009194b0beada0d51"
       }
     ],
     "attachments": [
@@ -21,7 +21,7 @@
     "files": [
       {
         "path": "data/replies/sribalaji/SriBalaji_Quotation_SBC-Q-2026-311.pdf",
-        "sha256": "b2adaea4152229d13597b68bdc10bc5a430554be5909dada78aa4b087dff1ea4"
+        "sha256": "0e8495ea1bf356176b96244e8587ec6e6bc3621d794a8c69d05e1d71344c00d1"
       }
     ],
     "attachments": [
@@ -59,7 +59,7 @@
     "files": [
       {
         "path": "data/replies/anand/Anand_reply.eml",
-        "sha256": "af01dfa6f0dcbfee4b0698933b2c5e34ed8584fcc37f969198b6abb065c33aaf"
+        "sha256": "13968888d2af7c81b1e0eb2e2130cc9b5bb6bfd0b81779b2200b52adee568468"
       }
     ],
     "attachments": []

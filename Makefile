@@ -4,7 +4,7 @@ SHELL := /bin/bash
 # (cd x && ...) so that this PATH is the one used to find uv and npm.
 export PATH := /opt/homebrew/bin:$(PATH)
 
-.PHONY: help setup seed inbox ingest check-a check-c api web test
+.PHONY: help setup seed reset send inbox ingest check-a check-c api web test
 
 help:
 	@grep -E '^[a-z-]+:.*##' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-10s %s\n", $$1, $$2}'
@@ -15,6 +15,12 @@ setup: ## Install backend (uv, Python 3.12) and frontend (npm) dependencies
 
 seed: ## Regenerate the RFx, the five vendor replies, attachments and golden set (deterministic)
 	cd backend && uv run python ../data/gen/seed.py
+
+reset: ## Delete all app state: database, snapshots, inbox and outbox
+	cd backend && uv run python -m app.cli reset
+
+send: ## Send the RFx to the five vendors (the email stub writes .eml files to mail/outbox)
+	cd backend && uv run python -m app.cli send
 
 inbox: ## Drop the five seeded vendor replies into mail/inbox/<vendor>/ (the email stub)
 	cd backend && uv run python -m app.cli load-rfx && uv run python -m app.cli deliver

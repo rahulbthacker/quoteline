@@ -74,13 +74,51 @@ def clean_locator(locator: str) -> str:
     return locator.strip().strip("[]").strip()
 
 
+_NUMBER = re.compile(r"\d[\d,]*(?:\.\d+)?")
+CONTEXT_WINDOW = (600, 400)  # characters before and after the value
+CONTEXT_COVERAGE = 0.8
+
+
+def _tokens(text: str) -> list[str]:
+    return re.findall(r"[a-z0-9]+(?:\.[0-9]+)?", _squash(text).replace(",", ""))
+
+
+def _context_found(snippet: str, text: str, raw_value: float | None) -> bool:
+    """Is the snippet's wording in the file, next to the number it was read from?
+
+    Models quote table rows in different shapes (with pipes, with or without the number), so
+    a literal substring test is too brittle. Instead: find every place the number occurs in
+    the file and check that most of the snippet's words are within reach of one of them.
+    """
+    wanted = [t for t in _tokens(snippet) if len(t) > 1 or t.isdigit()]
+    if not wanted:
+        return False
+    if raw_value is None:
+        # No number to anchor on (a decline, a condition): the words must occur in sequence.
+        source = _tokens(text)
+        pairs = set(zip(source, source[1:], strict=False))
+        sequence = _tokens(snippet)
+        wanted_pairs = list(zip(sequence, sequence[1:], strict=False))
+        if not wanted_pairs:
+            return sequence[0] in source
+        return sum(pair in pairs for pair in wanted_pairs) / len(wanted_pairs) >= 0.9
+    for match in _NUMBER.finditer(text):
+        if abs(float(match.group().replace(",", "")) - raw_value) > 1e-6:
+            continue
+        start = max(0, match.start() - CONTEXT_WINDOW[0])
+        window = set(_tokens(text[start : match.end() + CONTEXT_WINDOW[1]]))
+        if sum(t in window for t in wanted) / len(wanted) >= CONTEXT_COVERAGE:
+            return True
+    return False
+
+
 def verify_source(
     document: ParsedDocument, locator: str, snippet: str, raw_value: float | None
 ) -> bool | None:
     """Does the file really say this, where the model says it does? Checked without a model.
 
-    Workbook: the cited cell must hold exactly the value. Text: the snippet must appear in the
-    file and contain the number. Image: None, there is no text layer to check against.
+    Workbook: the cited cell must hold exactly the value. Text: the number must occur in the
+    file with the snippet's wording around it. Image: None, there is no text layer to check.
     """
     if document.format == "image" or (not document.text.strip() and not document.cells):
         return None
@@ -91,10 +129,9 @@ def verify_source(
             if isinstance(value, int | float) and abs(float(value) - raw_value) < 1e-6:
                 return True
         return False
-    found = _squash(snippet) in _squash(document.text)
-    if raw_value is None:
-        return found
-    return found and any(abs(n - raw_value) < 1e-6 for n in _numbers(snippet))
+    if _squash(snippet) in _squash(document.text) and raw_value is None:
+        return True
+    return _context_found(snippet, document.text, raw_value)
 
 
 def build_request(

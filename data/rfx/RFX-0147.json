@@ -26,7 +26,7 @@
     },
     {
       "question_id": "Q2",
-      "text": "Are all inks and adhesives used on our packaging compliant for food-contact packaging (EuPIA GMP, Swiss Ordinance Annex 10 or IS 15495)? Attach the ink MSDS.",
+      "text": "Are the printing inks used on our packaging compliant for food-contact packaging? Name the standard (EuPIA GMP, Swiss Ordinance Annex 10 or IS 15495). An ink MSDS may be requested before award.",
       "mandatory": true
     },
     {

@@ -144,7 +144,7 @@ LINE_BY_ID = {line.line_id: line for line in LINES}
 
 QUESTIONNAIRE = [
     ("Q1", True, "Do you hold a valid BRCGS Packaging Materials certificate, or an equivalent GFSI-recognised certification (FSSC 22000, ISO 22000)? State certificate number and expiry."),
-    ("Q2", True, "Are all inks and adhesives used on our packaging compliant for food-contact packaging (EuPIA GMP, Swiss Ordinance Annex 10 or IS 15495)? Attach the ink MSDS."),
+    ("Q2", True, "Are the printing inks used on our packaging compliant for food-contact packaging? Name the standard (EuPIA GMP, Swiss Ordinance Annex 10 or IS 15495). An ink MSDS may be requested before award."),
     ("Q3", True, "How many production sites can supply this contract? A minimum of two is required for continuity of supply."),
     ("Q4", False, "What is your standard lead time from purchase order to delivery, in days?"),
     ("Q5", False, "What is your installed monthly conversion capacity, in tonnes?"),
@@ -303,7 +303,7 @@ QUALITY = {
         "result": "Pass",
         "answers": {
             "Q1": ("pass", "BRCGS Packaging Materials Issue 6, Grade AA, certificate no. BRC-PM-118204, valid to 14 March 2027."),
-            "Q2": ("pass", "All inks are water-based flexo inks compliant with EuPIA GMP and IS 15495; adhesives are starch based. MSDS available on request."),
+            "Q2": ("pass", "All inks are water-based flexo inks compliant with EuPIA GMP and IS 15495. MSDS available on request."),
             "Q3": ("pass", "Two plants: Chakan (Pune) and Sinnar (Nashik). Either plant can run the full range."),
             "Q4": ("answered", "10 working days from PO; 5 days for repeat items held as board stock."),
             "Q5": ("answered", "2,400 tonnes per month across both plants."),
@@ -355,7 +355,7 @@ QUALITY = {
         "result": "Pass",
         "answers": {
             "Q1": ("pass", "Yes. BRCGS Packaging Materials Issue 6, Grade A, certificate no. BRC-PM-093357, expiry 31 January 2027. Copy attached."),
-            "Q2": ("pass", "Yes. Inks and adhesives comply with EuPIA GMP and IS 15495."),
+            "Q2": ("pass", "Yes. Inks comply with EuPIA GMP and IS 15495."),
             "Q3": ("pass", "Two units: Vapi (Unit I) and Silvassa (Unit II)."),
             "Q4": ("answered", "8 days."),
             "Q5": ("answered", "1,500 tonnes."),
