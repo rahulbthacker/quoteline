@@ -17,14 +17,49 @@ from app.schemas.grid import (
     ReviewItem,
     ReviewOption,
 )
-from app.schemas.reply import Condition, Extraction, QuestionnaireAnswer, ReplyFile, VendorReply
+from app.schemas.reply import (
+    Condition,
+    Extraction,
+    LineMatch,
+    QuestionnaireAnswer,
+    ReadSpec,
+    ReplyFile,
+    VendorReply,
+)
 from app.schemas.rfx import FxPolicy, LineItem, LineSpec, Question, RFx, Terms
 from app.schemas.trace import Trace
 
 __all__ = [
-    "Actor", "Allocation", "Approval", "AuditEvent", "Award", "CellRef", "CellState",
-    "Condition", "Exclusion", "Extraction", "FxPolicy", "LineItem", "LineSpec", "ModelReading",
-    "NormalizationStep", "Override", "Question", "QuestionnaireAnswer", "QuoteCell", "RFx",
-    "ReplyFile", "ReviewItem", "ReviewKind", "ReviewOption", "Scenario", "ScenarioFilters",
-    "SourceRef", "Terms", "Trace", "VendorReply",
-]  # fmt: skip
+    "Actor",
+    "Allocation",
+    "Approval",
+    "AuditEvent",
+    "Award",
+    "CellRef",
+    "CellState",
+    "Condition",
+    "Exclusion",
+    "Extraction",
+    "LineMatch",
+    "ReadSpec",
+    "FxPolicy",
+    "LineItem",
+    "LineSpec",
+    "ModelReading",
+    "NormalizationStep",
+    "Override",
+    "Question",
+    "QuestionnaireAnswer",
+    "QuoteCell",
+    "RFx",
+    "ReplyFile",
+    "ReviewItem",
+    "ReviewKind",
+    "ReviewOption",
+    "Scenario",
+    "ScenarioFilters",
+    "SourceRef",
+    "Terms",
+    "Trace",
+    "VendorReply",
+]

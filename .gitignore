@@ -21,3 +21,9 @@ backend/var/
 .DS_Store
 .vscode/
 .idea/
+
+# mail stub runtime state
+mail/inbox/*
+mail/outbox/*
+!mail/inbox/.gitkeep
+!mail/outbox/.gitkeep

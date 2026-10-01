@@ -1,0 +1,58 @@
+# Conversion table. Admin-editable (Settings screen). All arithmetic that reaches the grid
+# uses these factors; no model output is ever used as a factor.
+base_unit: per_1000_pcs
+
+units:
+  per_piece:
+    label: per piece
+    to_base: {op: multiply, factor: 1000}
+    aliases: [per piece, per pc, per pcs, each, per no, per nos, per unit, "/pc", per number]
+  per_100:
+    label: per 100 pcs
+    to_base: {op: multiply, factor: 10}
+    aliases: [per 100, per 100 pcs, per hundred, "/100", per 100 nos]
+  per_1000:
+    label: per 1,000 pcs
+    to_base: {op: multiply, factor: 1}
+    aliases: [per 1000, "per 1,000", per thousand, per 1000 pcs, "per 1,000 pcs", per m, "/1000", per thousand sets, "per 1,000 sets"]
+  per_kg:
+    label: per kg of board
+    # multiplied by the RFx line's board_weight_kg_per_pc, then by 1000
+    to_base: {op: weight, factor: 1000}
+    aliases: [per kg, "/kg", per kilo, per kilogram]
+  per_box:
+    label: per box
+    ambiguous: true
+    reason: "'box' may mean one piece or a packed bundle or carton of pieces"
+    interpretations:
+      - {id: per_piece, label: one box is one piece, to_base: {op: multiply, factor: 1000}}
+      - {id: per_pack, label: one box is the stated pack, to_base: {op: pack, factor: 1000}}
+    aliases: [per box, "/box", per carton]
+  per_bundle:
+    label: per bundle
+    ambiguous: true
+    reason: "bundle size must be stated to convert"
+    interpretations:
+      - {id: per_pack, label: one bundle is the stated pack, to_base: {op: pack, factor: 1000}}
+    aliases: [per bundle, "/bundle"]
+  per_set:
+    label: per set
+    ambiguous: true
+    reason: "'set' is only a piece when the RFx line itself is counted in sets"
+    interpretations:
+      - {id: per_piece, label: one set is one RFx unit, to_base: {op: multiply, factor: 1000}}
+    aliases: [per set, "/set"]
+
+currencies:
+  INR: {symbols: ["₹", "Rs", "Rs.", "INR", "rupees"]}
+  USD: {symbols: ["$", "USD", "US$", "US dollars", "dollars"]}
+
+thresholds:
+  agreement_tolerance_pct: 0.5     # two readings within this are the same number
+  min_confidence: 0.80             # agreeing readings are flagged if BOTH models are below this
+  hard_min_confidence: 0.50        # ... or if EITHER model is below this
+  match_accept: 0.72               # deterministic line-match score to accept without a model
+  match_margin: 0.08               # required lead over the runner-up
+  match_floor: 0.45                # below this the row is flagged unmatched
+  outlier_sigma: 2.0
+  outlier_min_deviation_pct: 15.0

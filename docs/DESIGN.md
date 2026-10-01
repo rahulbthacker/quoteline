@@ -32,6 +32,23 @@ this file records decisions as they are made so they are not reconstructed from 
 | D18 | `make seed` is byte-deterministic (fixed seed, fixed timestamps, bundled DejaVu fonts). | "Golden JSON matches the generators" is then checkable by `git status` after a re-seed. |
 | D19 | Vendor domains use `.example`; fabricated certificates carry a one-line demo footer. | No collision with real companies, no document that could pass as a real certificate. |
 
+### Extraction (Checkpoint C)
+
+| # | Decision | Why |
+|---|---|---|
+| D20 | The extractor reports raw value, verbatim unit, currency, snippet and locator. It never converts. Units are then read by the conversion table's alias list; the model's own unit label is only a fallback and is marked as such. | "LLMs propose, code decides", applied to the first thing that could go wrong: a unit. |
+| D21 | Every reading is checked against the file without a model. Workbook: the cited cell must hold exactly that value. Text: the snippet must appear in the file and contain the number. Photo: cannot be checked, so it relies on two-model agreement. A failed check flags the cell. | Provenance that is asserted by the model is not provenance. This catches a hallucinated or misattributed number. |
+| D22 | Line matching is deterministic first (dimensions 0.40, item type 0.25, ply 0.15, GSM 0.10, print 0.10), one-to-one, with Haiku only as a tie-break and "unmatched" below a floor. A different item type caps the score. | On this dataset all 139 rows match by code alone; the model is there for the row a vendor describes badly, not as the default. |
+| D23 | A buyer line number reported by the model only counts if the row itself leads with that number. | Gemini filled in RFx line ids for Meridian, whose sheet has none. The guard stops a model's guess becoming "evidence". |
+| D24 | Agreement needs the same value (within 0.5%), unit and currency from both models. Self-reported confidence flags a cell only when both models are below 0.80 or either is below 0.50. | Two families agreeing is strong evidence; one model hedging on an elliptical phrase ("38 for the 3-ply") is not a reason to block 11 cells. |
+| D25 | Image reads lead with Gemini, text reads with Claude; the other model is always the second reader. | Rahul's rule: image work to Gemini, the rest to Anthropic. |
+| D26 | A failed extraction is stored as a failure and flags every line of that vendor `model_error`. | Non-negotiable: never silently dropped. |
+
+Observed on two independent live runs (1 Oct): Meridian, Sri Balaji, Kaveri and Anand 100% on
+every field for both models. On NorthBox's blotted digit Claude declined to give a value both
+times; Gemini read 3,995 (wrong) on the first run and 3,935 (right) on the second. The cell
+was flagged both times. That is the case for a second reader in one line.
+
 Note for step 4: with five vendors, a plain ">2σ from the line median" rule fires on harmless
 2 to 5% deviations (8 to 10 cells in this dataset). The outlier check needs a materiality
 floor alongside the σ test.

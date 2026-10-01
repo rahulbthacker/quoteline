@@ -66,6 +66,8 @@ def call(
                 result = client.complete(spec.model, req)
             except ProviderError as exc:
                 error = exc
+            except Exception as exc:  # noqa: BLE001  an SDK surprise is still a traced failure
+                error = ProviderError(f"{type(exc).__name__}: {exc}", retryable=False)
             latency_ms = int((time.perf_counter() - started) * 1000)
 
             if result is not None:

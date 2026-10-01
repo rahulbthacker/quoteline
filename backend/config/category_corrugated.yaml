@@ -1,0 +1,22 @@
+# Category template: corrugated packaging. Vocabulary used by the deterministic line matcher
+# to recognise what kind of item a description refers to. Longest phrase wins.
+item_types:
+  partition: [partition, divider, partition assy, partition set]
+  export_carton: [export carton, export box]
+  edge_protector: [edge protector, angle board, edge guard]
+  corner_post: [corner post]
+  honeycomb_pad: [honeycomb]
+  telescopic_box: [telescopic]
+  half_slotted: [half slotted, half-slotted, hsc]
+  display_shipper: [display shipper, display]
+  mailer: [mailer]
+  tray: [tray, srp, shelf-ready, shelf ready]
+  insert_pad: [insert pad, insert]
+  layer_pad: [layer pad]
+  sheet: [corrugated sheet, plain sheet, sheet]
+  rsc_box: [rsc, regular slotted, carton, box]
+print_words:
+  0: [plain, unprinted, no print]
+  1: [1 colour, 1 color, 1 col, one-colour, one colour, single colour]
+  2: [2 colour, 2 color, 2 col, two-colour, two colour]
+ply_words: {3: [3 ply, 3-ply, three-ply, three ply], 5: [5 ply, 5-ply, five-ply, five ply], 7: [7 ply, 7-ply, seven-ply, seven ply]}

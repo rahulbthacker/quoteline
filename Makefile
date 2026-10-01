@@ -4,7 +4,7 @@ SHELL := /bin/bash
 # (cd x && ...) so that this PATH is the one used to find uv and npm.
 export PATH := /opt/homebrew/bin:$(PATH)
 
-.PHONY: help setup seed check-a api web test
+.PHONY: help setup seed inbox ingest check-a check-c api web test
 
 help:
 	@grep -E '^[a-z-]+:.*##' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-10s %s\n", $$1, $$2}'
@@ -15,6 +15,15 @@ setup: ## Install backend (uv, Python 3.12) and frontend (npm) dependencies
 
 seed: ## Regenerate the RFx, the five vendor replies, attachments and golden set (deterministic)
 	cd backend && uv run python ../data/gen/seed.py
+
+inbox: ## Drop the five seeded vendor replies into mail/inbox/<vendor>/ (the email stub)
+	cd backend && uv run python -m app.cli load-rfx && uv run python -m app.cli deliver
+
+ingest: ## Read everything in the inbox with both models (live calls, about 4 minutes)
+	cd backend && uv run python -m app.cli ingest
+
+check-c: ## Checkpoint C: score the stored extractions and flags against the golden set
+	cd backend && uv run python -m app.eval.checkpoint_c
 
 check-a: ## Checkpoint A: one live traced call per role across both providers
 	cd backend && uv run python -m app.llm.check

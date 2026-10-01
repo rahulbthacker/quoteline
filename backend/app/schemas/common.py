@@ -38,6 +38,10 @@ class SourceRef(Schema):
     locator: str = Field(description="Sheet!cell, page N, paragraph N, image region, email line")
     snippet: str = Field(description="Verbatim text the value was read from")
     bbox: tuple[float, float, float, float] | None = None
+    snippet_verified: bool | None = Field(
+        default=None,
+        description="True if the snippet was found verbatim in the parsed file; None for images",
+    )
 
 
 class Actor(Schema):

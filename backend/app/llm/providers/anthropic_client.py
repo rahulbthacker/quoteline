@@ -48,9 +48,11 @@ class AnthropicClient:
 
         try:
             if req.output_schema is not None:
-                response = self._client.messages.parse(output_format=req.output_schema, **kwargs)
-            else:
-                response = self._client.messages.create(**kwargs)
+                kwargs["output_format"] = req.output_schema
+            # Streamed so long extractions never hit the non-streaming time limit.
+            with self._client.messages.stream(**kwargs) as stream:
+                response = stream.get_final_message()
+                request_id = getattr(stream, "request_id", None) or response.id
         except anthropic.RateLimitError as exc:
             raise ProviderError(f"rate limited: {exc.message}", retryable=True) from exc
         except anthropic.APIStatusError as exc:
@@ -76,5 +78,5 @@ class AnthropicClient:
             + (usage.cache_read_input_tokens or 0),
             output_tokens=usage.output_tokens,
             served_model=response.model,
-            request_id=response._request_id,
+            request_id=request_id,
         )
