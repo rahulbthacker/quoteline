@@ -9,13 +9,20 @@ from app.schemas.award import (
 )
 from app.schemas.common import Actor, CellState, ReviewKind, SourceRef
 from app.schemas.grid import (
+    Assumptions,
     CellRef,
+    Freight,
+    Grid,
+    GridLine,
+    GridVendor,
     ModelReading,
     NormalizationStep,
     Override,
     QuoteCell,
     ReviewItem,
     ReviewOption,
+    RunStats,
+    VendorTotals,
 )
 from app.schemas.reply import (
     Condition,
@@ -30,6 +37,13 @@ from app.schemas.rfx import FxPolicy, LineItem, LineSpec, Question, RFx, Terms
 from app.schemas.trace import Trace
 
 __all__ = [
+    "Assumptions",
+    "Freight",
+    "Grid",
+    "GridLine",
+    "GridVendor",
+    "RunStats",
+    "VendorTotals",
     "Actor",
     "Allocation",
     "Approval",

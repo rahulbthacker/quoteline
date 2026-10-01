@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from app.config import ModelSpec, Settings, parse_chain
+from app.config import ROLES, ModelSpec, Settings, parse_chain
 from app.llm import pricing
 
 
@@ -22,11 +22,7 @@ def test_parse_chain_rejects_bad_specs(bad):
 
 def test_default_roles_cover_both_providers():
     settings = Settings(_env_file=None)
-    providers = {
-        spec.provider
-        for role in ("EXTRACT_PRIMARY", "EXTRACT_SECONDARY", "JUDGE", "ROUTER", "ANALYST")
-        for spec in settings.chain(role)
-    }
+    providers = {spec.provider for role in ROLES for spec in settings.chain(role)}
     assert providers == {"anthropic", "gemini"}
     # Dual-model agreement only means something if the two extractors are different families.
     assert (

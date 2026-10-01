@@ -56,3 +56,32 @@ def scan_inbox() -> dict[str, list[Path]]:
 
 def received_at(path: Path) -> datetime:
     return datetime.fromtimestamp(path.stat().st_mtime, tz=UTC)
+
+
+def write_outbox(
+    filename: str,
+    *,
+    sender: str,
+    to: str,
+    subject: str,
+    body: str,
+    attachments: list[tuple[str, bytes, str, str]] | None = None,
+    message_id: str | None = None,
+) -> Path:
+    """Write one .eml to mail/outbox/. This is the whole of "sending"."""
+    from email.message import EmailMessage
+    from email.policy import SMTP
+    from email.utils import format_datetime
+
+    message = EmailMessage(policy=SMTP)
+    message["From"], message["To"], message["Subject"] = sender, to, subject
+    message["Date"] = format_datetime(datetime.now(UTC))
+    if message_id:
+        message["Message-ID"] = message_id
+    message.set_content(body)
+    for name, payload, maintype, subtype in attachments or []:
+        message.add_attachment(payload, maintype=maintype, subtype=subtype, filename=name)
+    OUTBOX.mkdir(parents=True, exist_ok=True)
+    path = OUTBOX / filename
+    path.write_bytes(message.as_bytes())
+    return path

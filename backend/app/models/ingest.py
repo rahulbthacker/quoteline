@@ -32,6 +32,7 @@ class VendorRow(Base):
     contact: Mapped[str | None] = mapped_column(String(128))
     email: Mapped[str | None] = mapped_column(String(128))
     city: Mapped[str | None] = mapped_column(String(64))
+    position: Mapped[int] = mapped_column(Integer, default=0)  # column order in the grid
 
 
 class ReplyFileRow(Base):

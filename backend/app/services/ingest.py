@@ -16,7 +16,7 @@ from pathlib import Path
 
 from sqlalchemy import delete, select
 
-from app.agents import extractor, router
+from app.agents import evaluator, extractor, router
 from app.agents.router import RoutingDecision
 from app.config import REPO_ROOT
 from app.db import init_db, session_scope
@@ -28,16 +28,17 @@ from app.models import (
     ReplyFileRow,
     RfxRow,
     TraceRow,
+    VendorQualityRow,
     VendorRow,
 )
 from app.schemas import Condition, Extraction, RFx
-from app.services import line_matcher, mail_stub, parsers
+from app.services import audit, line_matcher, mail_stub, parsers
 from app.services.parsers import ParsedDocument
 from app.services.validation import readings_agree
 
 SEED_RFX = REPO_ROOT / "data" / "rfx"
 ROLES = {"primary": "EXTRACT_PRIMARY", "secondary": "EXTRACT_SECONDARY"}
-MAX_WORKERS = 6
+MAX_WORKERS = 16  # every read is an independent network call
 
 
 @dataclass
@@ -74,9 +75,9 @@ def load_seed_rfx() -> RFx:
     with session_scope() as session:
         if session.get(RfxRow, rfx.id) is None:
             session.add(RfxRow(id=rfx.id, payload=payload, status="sent"))
-        for vendor in vendors:
+        for position, vendor in enumerate(vendors):
             if session.get(VendorRow, (rfx.id, vendor["vendor_id"])) is None:
-                session.add(VendorRow(rfx_id=rfx.id, **vendor))
+                session.add(VendorRow(rfx_id=rfx.id, position=position, **vendor))
     return rfx
 
 
@@ -123,6 +124,27 @@ def _read(role: str, rfx: RFx, item: InboundFile, run_id: str) -> FileRead:
     return FileRead(role, matched, conditions, result.served_model, result.call_id)
 
 
+def _evaluate(
+    rfx: RFx, vendor_id: str, vendor_name: str, items: list[InboundFile], run_id: str
+) -> dict:
+    """Judge one vendor's questionnaire answers from everything they sent."""
+    documents = [(i.document.name, i.document.text) for i in items if i.document.text.strip()]
+    images = [
+        (i.document.name, image)
+        for i in items
+        if not i.document.text.strip()
+        for image in i.document.images
+    ]
+    try:
+        answers, result = evaluator.evaluate(rfx, vendor_name, documents, images, run_id=run_id)
+    except ModelCallError as exc:
+        return {"vendor_id": vendor_id, "answers": [], "error": str(exc)}
+    return {
+        "vendor_id": vendor_id, "answers": answers, "error": None,
+        "model": result.served_model, "call_id": result.call_id,
+    }  # fmt: skip
+
+
 def agreement_score(primary: FileRead, secondary: FileRead) -> tuple[float | None, dict[str, bool]]:
     """Share of lines, read by at least one model, on which the two readings agree."""
     if primary.error or secondary.error:
@@ -155,10 +177,24 @@ def ingest(rfx_id: str, only_vendors: list[str] | None = None) -> dict:
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as pool:
         list(pool.map(lambda item: _route(item, run_id, rfx_id), items))
 
+    with session_scope() as session:
+        names = {
+            v.vendor_id: v.name
+            for v in session.scalars(select(VendorRow).where(VendorRow.rfx_id == rfx_id))
+        }
     quotes = [item for item in items if item.routing and item.routing.kind == "quote"]
     jobs = [(role, item) for item in quotes for role in ROLES]
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as pool:
+        # Extraction (two models per quote) and quality evaluation run side by side.
+        quality_futures = [
+            pool.submit(
+                _evaluate, rfx, vendor_id, names.get(vendor_id, vendor_id),
+                [item for item in items if item.vendor_id == vendor_id], run_id,
+            )
+            for vendor_id in inbox
+        ]  # fmt: skip
         reads = list(pool.map(lambda job: _read(job[0], rfx, job[1], run_id), jobs))
+        qualities = [future.result() for future in quality_futures]
     by_file: dict[tuple[str, str], dict[str, FileRead]] = {}
     for (role, item), read in zip(jobs, reads, strict=True):
         by_file.setdefault((item.vendor_id, item.document.name), {})[role] = read
@@ -166,10 +202,19 @@ def ingest(rfx_id: str, only_vendors: list[str] | None = None) -> dict:
     summary = {"run_id": run_id, "rfx_id": rfx_id, "vendors": {}}
     with session_scope() as session:
         vendors = list(inbox)
-        for table in (ReplyFileRow, ExtractionCallRow, ExtractionRow, ConditionRow):
+        tables = (ReplyFileRow, ExtractionCallRow, ExtractionRow, ConditionRow, VendorQualityRow)
+        for table in tables:
             session.execute(
                 delete(table).where(table.rfx_id == rfx_id, table.vendor_id.in_(vendors))
             )
+        for quality in qualities:
+            session.add(
+                VendorQualityRow(
+                    rfx_id=rfx_id, vendor_id=quality["vendor_id"], answers=quality["answers"],
+                    overrides={}, model=quality.get("model"), call_id=quality.get("call_id"),
+                    error=quality["error"], run_id=run_id,
+                )
+            )  # fmt: skip
 
         for item in items:
             routing = item.routing
@@ -239,6 +284,12 @@ def ingest(rfx_id: str, only_vendors: list[str] | None = None) -> dict:
                 },
             }
 
+        audit.record(
+            session, rfx_id, "ingest.complete",
+            f"Read {len(items)} files from {len(inbox)} vendors with two models each; "
+            f"{sum(1 for r in reads if r.error)} extraction failures",
+            after={"run_id": run_id, "vendors": list(inbox)},
+        )  # fmt: skip
         traces = session.scalars(select(TraceRow).where(TraceRow.parent_run_id == run_id)).all()
         summary["calls"] = len(traces)
         summary["failed_calls"] = sum(1 for t in traces if t.status != "ok")

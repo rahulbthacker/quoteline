@@ -14,8 +14,28 @@ BACKEND_ROOT = REPO_ROOT / "backend"
 VAR_DIR = BACKEND_ROOT / "var"
 
 Provider = Literal["anthropic", "gemini"]
-Role = Literal["EXTRACT_PRIMARY", "EXTRACT_SECONDARY", "JUDGE", "ROUTER", "ANALYST"]
-ROLES: tuple[Role, ...] = ("EXTRACT_PRIMARY", "EXTRACT_SECONDARY", "JUDGE", "ROUTER", "ANALYST")
+Role = Literal[
+    "EXTRACT_PRIMARY",
+    "EXTRACT_SECONDARY",
+    "JUDGE",
+    "ROUTER",
+    "ANALYST",
+    "EVALUATOR",
+    "EVALUATOR_VISION",
+    "INTAKE",
+    "CLARIFIER",
+]
+ROLES: tuple[Role, ...] = (
+    "EXTRACT_PRIMARY",
+    "EXTRACT_SECONDARY",
+    "JUDGE",
+    "ROUTER",
+    "ANALYST",
+    "EVALUATOR",
+    "EVALUATOR_VISION",
+    "INTAKE",
+    "CLARIFIER",
+)
 PROVIDERS: tuple[Provider, ...] = ("anthropic", "gemini")
 
 
@@ -58,6 +78,11 @@ class Settings(BaseSettings):
     judge: str = "anthropic:claude-opus-5-5"
     router: str = "anthropic:claude-haiku-4-5"
     analyst: str = "anthropic:claude-opus-5-5"
+    # Execution work runs on Claude; anything read from an image runs on Gemini.
+    evaluator: str = "anthropic:claude-opus-5-5"
+    evaluator_vision: str = "gemini:gemini-3.1-pro-preview"
+    intake: str = "anthropic:claude-opus-5-5"
+    clarifier: str = "anthropic:claude-opus-5-5"
 
     cost_usd_inr: float = 83.42
     database_url: str = f"sqlite:///{VAR_DIR / 'quoteline.db'}"

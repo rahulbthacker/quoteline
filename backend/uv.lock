@@ -1601,6 +1601,7 @@ dependencies = [
     { name = "pypdfium2" },
     { name = "python-docx" },
     { name = "pyyaml" },
+    { name = "reportlab" },
     { name = "sqlalchemy" },
     { name = "uvicorn", extra = ["standard"] },
 ]
@@ -1630,6 +1631,7 @@ requires-dist = [
     { name = "pypdfium2", specifier = ">=5.13.0" },
     { name = "python-docx", specifier = ">=1.2.0" },
     { name = "pyyaml", specifier = ">=6.0.3" },
+    { name = "reportlab", specifier = ">=5.0.1" },
     { name = "sqlalchemy", specifier = ">=2" },
     { name = "uvicorn", extras = ["standard"], specifier = ">=0.54.0" },
 ]
