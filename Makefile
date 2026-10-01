@@ -4,7 +4,7 @@ SHELL := /bin/bash
 # (cd x && ...) so that this PATH is the one used to find uv and npm.
 export PATH := /opt/homebrew/bin:$(PATH)
 
-.PHONY: help setup seed reset send inbox ingest check-a check-c api web test
+.PHONY: help setup seed reset send inbox ingest check-a check-c check-e api web test
 
 help:
 	@grep -E '^[a-z-]+:.*##' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-10s %s\n", $$1, $$2}'
@@ -30,6 +30,9 @@ ingest: ## Read everything in the inbox with both models (live calls, about 4 mi
 
 check-c: ## Checkpoint C: score the stored extractions and flags against the golden set
 	cd backend && uv run python -m app.eval.checkpoint_c
+
+check-e: ## Checkpoint E: ask the analyst six questions live and check them against the award engine
+	cd backend && uv run python -m app.eval.checkpoint_e
 
 check-a: ## Checkpoint A: one live traced call per role across both providers
 	cd backend && uv run python -m app.llm.check

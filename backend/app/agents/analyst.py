@@ -115,6 +115,9 @@ def check_figures(answer: str, rows: list[list]) -> list[str]:
             elif isinstance(value, str):
                 available += _numbers(value)
     missing = []
+    # "per 1,000" is the unit, and dimensions such as 600×400×400 are names, not figures.
+    answer = re.sub(r"per\s+1,?000", "per unit", answer)
+    answer = re.sub(r"\d+(?:\s*[x×]\s*\d+)+", "", answer)
     for token in re.findall(r"(?<![A-Za-z\d])\d[\d,]*(?:\.\d+)?", answer):
         value = float(token.replace(",", ""))
         decimals = len(token.split(".")[1]) if "." in token else 0
