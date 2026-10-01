@@ -3,6 +3,7 @@ SHELL := /bin/bash
 # Homebrew on Apple Silicon is not on PATH in non-login shells. Recipes run through the shell
 # (cd x && ...) so that this PATH is the one used to find uv and npm.
 export PATH := /opt/homebrew/bin:$(PATH)
+PORT ?= 8000
 
 .PHONY: help setup demo serve seed reset send inbox ingest check-a check-c check-e eval api web test
 
@@ -16,11 +17,11 @@ demo: setup ## One command: seed state, send the RFx, receive and read the five 
 	cd backend && uv run python -m app.cli deliver
 	cd backend && uv run python -m app.cli ingest
 	cd frontend && npm run build --silent
-	cd backend && uv run python -m app.cli serve --open
+	cd backend && uv run python -m app.cli serve --open --port $(PORT)
 
 serve: ## Serve the API and the built frontend on http://localhost:8000 (no reset, no model calls)
 	cd frontend && npm run build --silent
-	cd backend && uv run python -m app.cli serve --open
+	cd backend && uv run python -m app.cli serve --open --port $(PORT)
 
 setup: ## Install backend (uv, Python 3.12) and frontend (npm) dependencies
 	cd backend && uv sync --quiet

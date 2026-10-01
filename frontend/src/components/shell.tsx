@@ -22,10 +22,10 @@ function stages(o: Overview | undefined): Stage[] {
     { key: 'responses', label: 'Responses', sub: o ? `${o.replies} of ${o.vendors} in` : '', done: !!o && o.replies > 0 },
     {
       key: 'compare', label: 'Compare',
-      sub: !o?.replies ? 'no replies read' : o.review_open ? `${o.review_open} items to review` : `resolved · ${o.overrides} overrides`,
+      sub: !o?.replies ? 'no replies read' : o.review_open ? `${o.review_open} item${o.review_open === 1 ? '' : 's'} to review` : `resolved · ${o.overrides} overrides`,
       done: !!o && o.replies > 0 && o.review_open === 0,
     },
-    { key: 'analyse', label: 'Analyse', sub: o?.scenarios ? `${o.scenarios} scenarios saved` : 'no scenarios yet', done: !!o?.scenarios },
+    { key: 'analyse', label: 'Analyse', sub: o?.scenarios ? `${o.scenarios} scenario${o.scenarios === 1 ? '' : 's'} saved` : 'no scenarios yet', done: !!o?.scenarios },
     { key: 'award', label: 'Award', sub: o?.award_status ? awardLabel[o.award_status] : 'not drafted', done: o?.award_status === 'approved' },
   ]
 }

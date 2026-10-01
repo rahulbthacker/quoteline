@@ -360,6 +360,7 @@ def _base_cell(
             cell.normalization_trace = candidate.steps
             return cell
         candidate = chosen
+        cell.annotation = f"{UNIT_LABEL[lead.unit_code]}: {chosen.label.lower()}"
     cell.inr_per_base = candidate.inr_per_base
     cell.normalization_trace = list(candidate.steps)
     return cell
