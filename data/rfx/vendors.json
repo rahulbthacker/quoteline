@@ -1,0 +1,37 @@
+[
+  {
+    "vendor_id": "meridian",
+    "name": "Meridian Packaging",
+    "contact": "Sneha Kulkarni",
+    "email": "sales@meridianpackaging.example",
+    "city": "Pune"
+  },
+  {
+    "vendor_id": "sribalaji",
+    "name": "Sri Balaji Corrugators",
+    "contact": "K. Venkatesh",
+    "email": "quotes@sribalajicorrugators.example",
+    "city": "Sivakasi"
+  },
+  {
+    "vendor_id": "kaveri",
+    "name": "Kaveri Boards",
+    "contact": "Arun Subramanian",
+    "email": "exports@kaveriboards.example",
+    "city": "Chennai"
+  },
+  {
+    "vendor_id": "northbox",
+    "name": "NorthBox Ltd",
+    "contact": "Imran Shaikh",
+    "email": "imran@northbox.example",
+    "city": "Bhiwandi"
+  },
+  {
+    "vendor_id": "anand",
+    "name": "Anand Papers",
+    "contact": "Vinod Anand",
+    "email": "vinod@anandpapers.example",
+    "city": "Vapi"
+  }
+]

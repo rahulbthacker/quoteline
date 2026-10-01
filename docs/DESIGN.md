@@ -17,6 +17,25 @@ this file records decisions as they are made so they are not reconstructed from 
 | D9 | The conditional 4% footnote discount sits on Sri Balaji's PDF, as the brief's dataset table says. The mockups show it on Kaveri; the mockups are a visual reference, the brief is the spec. | Rahul: go with what the case study asks for. |
 | D7 | There is no offline mode. Without a key, the call fails and the failure is traced. | Non-negotiable 1. |
 
+### Dataset (Checkpoint B)
+
+| # | Decision | Why |
+|---|---|---|
+| D10 | Prices come from a physical model: blank area from style and dimensions, board grammage from ply and GSM, a conversion rate per kg, then vendor positioning and noise. | Board weights, per-kg quotes and per-1,000 rates stay mutually consistent, which is what makes Anand's ₹/kg email convertible and the whole set credible to a packaging buyer. |
+| D11 | Contract is about ₹3.7 Cr across 30 lines; rates run from ₹1.6k (layer pads) to ₹1.2 L (7-ply export cartons) per 1,000. | Brief: "trust at ₹4 crore". |
+| D12 | Each vendor quotes in a different basis: Meridian ₹ per piece, Sri Balaji ₹ per 1,000, Kaveri USD per thousand (L01 per box), NorthBox ₹ per 100, Anand ₹ per kg. | Exercises every row of the conversion table with real inputs. |
+| D13 | Anand's "42 for the 5-ply, 38 for the 3-ply" applies to every line of that ply; "rest" is the 7-ply and ancillary lines. Two of the rest (L25, L27) are new this year, so "same as last year" cannot resolve and must flag. | The natural reading of a two-line email against a 30-line RFx, and it produces an honest unresolved case instead of a contrived one. |
+| D14 | NorthBox's ambiguous digit is an ink blot over the left half of the tens digit on L05: 3,935 or 3,985. | A 3 and an 8 differ only in the half the blot hides, so the ambiguity is physical, not a rendering trick. Both readings are plausible prices. |
+| D15 | Sri Balaji's footnote reads "4% discount on lines above ₹1 L". The vendor's intent in the golden set is rate above ₹1,00,000 per 1,000 (only L04); the other reading, line value above ₹1 L, would hit all 30 lines. | The condition is genuinely ambiguous in the way real footnotes are, and the two readings differ by about ₹14 L. |
+| D16 | PDF pages are rasterised with pypdfium2, not pdf2image. | pdf2image needs a system install of poppler, which would break "one command on a fresh clone". Deviation from brief section 2. |
+| D17 | Reply files are committed as ordinary git blobs, not Git LFS. | The largest is 640 KB. LFS would make a fresh clone without git-lfs check out pointer files and fail. |
+| D18 | `make seed` is byte-deterministic (fixed seed, fixed timestamps, bundled DejaVu fonts). | "Golden JSON matches the generators" is then checkable by `git status` after a re-seed. |
+| D19 | Vendor domains use `.example`; fabricated certificates carry a one-line demo footer. | No collision with real companies, no document that could pass as a real certificate. |
+
+Note for step 4: with five vendors, a plain ">2σ from the line median" rule fires on harmless
+2 to 5% deviations (8 to 10 cells in this dataset). The outlier check needs a materiality
+floor alongside the σ test.
+
 ## Open questions for Rahul
 
 1. The brief lists seven ReviewItem kinds; validation and the line matcher also need

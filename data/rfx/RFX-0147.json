@@ -1,0 +1,596 @@
+{
+  "id": "RFX-0147",
+  "title": "Corrugated packaging, Q4 2026",
+  "category": "Corrugated packaging",
+  "base_unit": "per_1000_pcs",
+  "currency": "INR",
+  "fx_policy": {
+    "source": "RBI reference rate",
+    "rate": 83.42,
+    "foreign_currency": "USD",
+    "as_of": "2026-09-26"
+  },
+  "freight_policy": "Freight is excluded from line prices and shown per vendor as stated.",
+  "tax_policy": "GST is excluded from all prices.",
+  "terms": {
+    "payment": "60 days from receipt of material",
+    "delivery": "Delivered to Chakan, Pune, against weekly schedules",
+    "validity_days": 60,
+    "assumptions": []
+  },
+  "questionnaire": [
+    {
+      "question_id": "Q1",
+      "text": "Do you hold a valid BRCGS Packaging Materials certificate, or an equivalent GFSI-recognised certification (FSSC 22000, ISO 22000)? State certificate number and expiry.",
+      "mandatory": true
+    },
+    {
+      "question_id": "Q2",
+      "text": "Are all inks and adhesives used on our packaging compliant for food-contact packaging (EuPIA GMP, Swiss Ordinance Annex 10 or IS 15495)? Attach the ink MSDS.",
+      "mandatory": true
+    },
+    {
+      "question_id": "Q3",
+      "text": "How many production sites can supply this contract? A minimum of two is required for continuity of supply.",
+      "mandatory": true
+    },
+    {
+      "question_id": "Q4",
+      "text": "What is your standard lead time from purchase order to delivery, in days?",
+      "mandatory": false
+    },
+    {
+      "question_id": "Q5",
+      "text": "What is your installed monthly conversion capacity, in tonnes?",
+      "mandatory": false
+    },
+    {
+      "question_id": "Q6",
+      "text": "Do you accept payment terms of 60 days from receipt of material?",
+      "mandatory": false
+    },
+    {
+      "question_id": "Q7",
+      "text": "What recycled fibre content do you offer, and do you hold FSC chain-of-custody certification?",
+      "mandatory": false
+    },
+    {
+      "question_id": "Q8",
+      "text": "Can you hold two weeks of safety stock at your warehouse at your cost?",
+      "mandatory": false
+    }
+  ],
+  "line_items": [
+    {
+      "line_id": "L01",
+      "description": "5-ply RSC box 600×400×400, 150 GSM KLB",
+      "spec": {
+        "ply": 5,
+        "gsm": 150,
+        "dims_mm": [
+          600,
+          400,
+          400
+        ],
+        "print": null,
+        "board_weight_kg_per_pc": 1.283
+      },
+      "qty": 65000,
+      "uom": "pcs",
+      "last_year_price_inr": 56550
+    },
+    {
+      "line_id": "L02",
+      "description": "3-ply RSC box 400×300×300, 120 GSM",
+      "spec": {
+        "ply": 3,
+        "gsm": 120,
+        "dims_mm": [
+          400,
+          300,
+          300
+        ],
+        "print": null,
+        "board_weight_kg_per_pc": 0.353
+      },
+      "qty": 180000,
+      "uom": "pcs",
+      "last_year_price_inr": 14150
+    },
+    {
+      "line_id": "L03",
+      "description": "5-ply die-cut tray 500×350×120, 150 GSM",
+      "spec": {
+        "ply": 5,
+        "gsm": 150,
+        "dims_mm": [
+          500,
+          350,
+          120
+        ],
+        "print": null,
+        "board_weight_kg_per_pc": 0.386
+      },
+      "qty": 75000,
+      "uom": "pcs",
+      "last_year_price_inr": 18100
+    },
+    {
+      "line_id": "L04",
+      "description": "7-ply export carton 650×450×450, 180 GSM",
+      "spec": {
+        "ply": 7,
+        "gsm": 180,
+        "dims_mm": [
+          650,
+          450,
+          450
+        ],
+        "print": null,
+        "board_weight_kg_per_pc": 2.468
+      },
+      "qty": 11000,
+      "uom": "pcs",
+      "last_year_price_inr": 117950
+    },
+    {
+      "line_id": "L05",
+      "description": "Corrugated sheet 5-ply 1200×1000, 150 GSM",
+      "spec": {
+        "ply": 5,
+        "gsm": 150,
+        "dims_mm": [
+          1200,
+          1000
+        ],
+        "print": null,
+        "board_weight_kg_per_pc": 0.943
+      },
+      "qty": 30000,
+      "uom": "pcs",
+      "last_year_price_inr": 41850
+    },
+    {
+      "line_id": "L06",
+      "description": "Partition set, 3-ply, 12 cell, for 400×300×300 box",
+      "spec": {
+        "ply": 3,
+        "gsm": 120,
+        "dims_mm": null,
+        "print": null,
+        "board_weight_kg_per_pc": 0.21
+      },
+      "qty": 110000,
+      "uom": "sets",
+      "last_year_price_inr": 8750
+    },
+    {
+      "line_id": "L07",
+      "description": "3-ply mailer 250×200×100, 120 GSM, printed 1 colour",
+      "spec": {
+        "ply": 3,
+        "gsm": 120,
+        "dims_mm": [
+          250,
+          200,
+          100
+        ],
+        "print": "1 colour",
+        "board_weight_kg_per_pc": 0.154
+      },
+      "qty": 130000,
+      "uom": "pcs",
+      "last_year_price_inr": 6550
+    },
+    {
+      "line_id": "L08",
+      "description": "Edge protector 50×50×3 mm, 600 mm long",
+      "spec": {
+        "ply": null,
+        "gsm": null,
+        "dims_mm": [
+          50,
+          50,
+          3,
+          600
+        ],
+        "print": null,
+        "board_weight_kg_per_pc": 0.135
+      },
+      "qty": 70000,
+      "uom": "pcs",
+      "last_year_price_inr": 6400
+    },
+    {
+      "line_id": "L09",
+      "description": "3-ply RSC box 300×200×200, 120 GSM",
+      "spec": {
+        "ply": 3,
+        "gsm": 120,
+        "dims_mm": [
+          300,
+          200,
+          200
+        ],
+        "print": null,
+        "board_weight_kg_per_pc": 0.17
+      },
+      "qty": 215000,
+      "uom": "pcs",
+      "last_year_price_inr": 6800
+    },
+    {
+      "line_id": "L10",
+      "description": "3-ply RSC box 450×300×250, 120 GSM, printed 1 colour",
+      "spec": {
+        "ply": 3,
+        "gsm": 120,
+        "dims_mm": [
+          450,
+          300,
+          250
+        ],
+        "print": "1 colour",
+        "board_weight_kg_per_pc": 0.346
+      },
+      "qty": 120000,
+      "uom": "pcs",
+      "last_year_price_inr": 13950
+    },
+    {
+      "line_id": "L11",
+      "description": "3-ply RSC box 350×250×200, 140 GSM, printed 2 colour",
+      "spec": {
+        "ply": 3,
+        "gsm": 140,
+        "dims_mm": [
+          350,
+          250,
+          200
+        ],
+        "print": "2 colour",
+        "board_weight_kg_per_pc": 0.25
+      },
+      "qty": 140000,
+      "uom": "pcs",
+      "last_year_price_inr": 10300
+    },
+    {
+      "line_id": "L12",
+      "description": "3-ply die-cut shelf-ready tray 400×300×100, 140 GSM, printed 2 colour",
+      "spec": {
+        "ply": 3,
+        "gsm": 140,
+        "dims_mm": [
+          400,
+          300,
+          100
+        ],
+        "print": "2 colour",
+        "board_weight_kg_per_pc": 0.155
+      },
+      "qty": 100000,
+      "uom": "pcs",
+      "last_year_price_inr": 6800
+    },
+    {
+      "line_id": "L13",
+      "description": "3-ply layer pad 390×290, 120 GSM",
+      "spec": {
+        "ply": 3,
+        "gsm": 120,
+        "dims_mm": [
+          390,
+          290
+        ],
+        "print": null,
+        "board_weight_kg_per_pc": 0.046
+      },
+      "qty": 340000,
+      "uom": "pcs",
+      "last_year_price_inr": 1900
+    },
+    {
+      "line_id": "L14",
+      "description": "Corrugated sheet 3-ply 1000×800, 120 GSM",
+      "spec": {
+        "ply": 3,
+        "gsm": 120,
+        "dims_mm": [
+          1000,
+          800
+        ],
+        "print": null,
+        "board_weight_kg_per_pc": 0.326
+      },
+      "qty": 50000,
+      "uom": "pcs",
+      "last_year_price_inr": 13100
+    },
+    {
+      "line_id": "L15",
+      "description": "5-ply RSC box 500×400×300, 150 GSM, printed 1 colour",
+      "spec": {
+        "ply": 5,
+        "gsm": 150,
+        "dims_mm": [
+          500,
+          400,
+          300
+        ],
+        "print": "1 colour",
+        "board_weight_kg_per_pc": 1.012
+      },
+      "qty": 70000,
+      "uom": "pcs",
+      "last_year_price_inr": 45500
+    },
+    {
+      "line_id": "L16",
+      "description": "5-ply RSC box 450×350×350, 150 GSM",
+      "spec": {
+        "ply": 5,
+        "gsm": 150,
+        "dims_mm": [
+          450,
+          350,
+          350
+        ],
+        "print": null,
+        "board_weight_kg_per_pc": 0.902
+      },
+      "qty": 60000,
+      "uom": "pcs",
+      "last_year_price_inr": 39750
+    },
+    {
+      "line_id": "L17",
+      "description": "5-ply RSC box 550×350×300, 180 GSM, printed 2 colour",
+      "spec": {
+        "ply": 5,
+        "gsm": 180,
+        "dims_mm": [
+          550,
+          350,
+          300
+        ],
+        "print": "2 colour",
+        "board_weight_kg_per_pc": 1.048
+      },
+      "qty": 48000,
+      "uom": "pcs",
+      "last_year_price_inr": 47600
+    },
+    {
+      "line_id": "L18",
+      "description": "5-ply RSC box 400×400×400, 150 GSM",
+      "spec": {
+        "ply": 5,
+        "gsm": 150,
+        "dims_mm": [
+          400,
+          400,
+          400
+        ],
+        "print": null,
+        "board_weight_kg_per_pc": 1.031
+      },
+      "qty": 52000,
+      "uom": "pcs",
+      "last_year_price_inr": 45350
+    },
+    {
+      "line_id": "L19",
+      "description": "5-ply RSC box 700×450×350, 180 GSM",
+      "spec": {
+        "ply": 5,
+        "gsm": 180,
+        "dims_mm": [
+          700,
+          450,
+          350
+        ],
+        "print": null,
+        "board_weight_kg_per_pc": 1.64
+      },
+      "qty": 26000,
+      "uom": "pcs",
+      "last_year_price_inr": 72800
+    },
+    {
+      "line_id": "L20",
+      "description": "5-ply die-cut display shipper 600×400×200, 150 GSM, printed 2 colour",
+      "spec": {
+        "ply": 5,
+        "gsm": 150,
+        "dims_mm": [
+          600,
+          400,
+          200
+        ],
+        "print": "2 colour",
+        "board_weight_kg_per_pc": 0.687
+      },
+      "qty": 22000,
+      "uom": "pcs",
+      "last_year_price_inr": 32700
+    },
+    {
+      "line_id": "L21",
+      "description": "5-ply HSC 600×400×300, 150 GSM",
+      "spec": {
+        "ply": 5,
+        "gsm": 150,
+        "dims_mm": [
+          600,
+          400,
+          300
+        ],
+        "print": null,
+        "board_weight_kg_per_pc": 0.802
+      },
+      "qty": 35000,
+      "uom": "pcs",
+      "last_year_price_inr": 35700
+    },
+    {
+      "line_id": "L22",
+      "description": "Partition set, 5-ply, 6 cell, for 600×400×400 box",
+      "spec": {
+        "ply": 5,
+        "gsm": 150,
+        "dims_mm": null,
+        "print": null,
+        "board_weight_kg_per_pc": 0.52
+      },
+      "qty": 65000,
+      "uom": "sets",
+      "last_year_price_inr": 23900
+    },
+    {
+      "line_id": "L23",
+      "description": "5-ply telescopic box 500×300×150, base and lid, 150 GSM",
+      "spec": {
+        "ply": 5,
+        "gsm": 150,
+        "dims_mm": [
+          500,
+          300,
+          150
+        ],
+        "print": null,
+        "board_weight_kg_per_pc": 0.857
+      },
+      "qty": 26000,
+      "uom": "pcs",
+      "last_year_price_inr": 39450
+    },
+    {
+      "line_id": "L24",
+      "description": "7-ply export carton 600×450×400, 180 GSM",
+      "spec": {
+        "ply": 7,
+        "gsm": 180,
+        "dims_mm": [
+          600,
+          450,
+          400
+        ],
+        "print": null,
+        "board_weight_kg_per_pc": 2.226
+      },
+      "qty": 9500,
+      "uom": "pcs",
+      "last_year_price_inr": 107750
+    },
+    {
+      "line_id": "L25",
+      "description": "7-ply export carton 600×400×450, 180 GSM, printed 1 colour",
+      "spec": {
+        "ply": 7,
+        "gsm": 180,
+        "dims_mm": [
+          600,
+          400,
+          450
+        ],
+        "print": "1 colour",
+        "board_weight_kg_per_pc": 2.122
+      },
+      "qty": 8000,
+      "uom": "pcs",
+      "last_year_price_inr": null
+    },
+    {
+      "line_id": "L26",
+      "description": "Edge protector 40×40×4 mm, 1000 mm long",
+      "spec": {
+        "ply": null,
+        "gsm": null,
+        "dims_mm": [
+          40,
+          40,
+          4,
+          1000
+        ],
+        "print": null,
+        "board_weight_kg_per_pc": 0.245
+      },
+      "qty": 35000,
+      "uom": "pcs",
+      "last_year_price_inr": 10300
+    },
+    {
+      "line_id": "L27",
+      "description": "Honeycomb pallet pad 1200×1000×20 mm",
+      "spec": {
+        "ply": null,
+        "gsm": null,
+        "dims_mm": [
+          1200,
+          1000,
+          20
+        ],
+        "print": null,
+        "board_weight_kg_per_pc": 1.9
+      },
+      "qty": 6000,
+      "uom": "pcs",
+      "last_year_price_inr": null
+    },
+    {
+      "line_id": "L28",
+      "description": "Corner post 80×80×5 mm, 900 mm long",
+      "spec": {
+        "ply": null,
+        "gsm": null,
+        "dims_mm": [
+          80,
+          80,
+          5,
+          900
+        ],
+        "print": null,
+        "board_weight_kg_per_pc": 0.52
+      },
+      "qty": 18000,
+      "uom": "pcs",
+      "last_year_price_inr": 16100
+    },
+    {
+      "line_id": "L29",
+      "description": "3-ply die-cut insert pad 380×280, 120 GSM",
+      "spec": {
+        "ply": 3,
+        "gsm": 120,
+        "dims_mm": [
+          380,
+          280
+        ],
+        "print": null,
+        "board_weight_kg_per_pc": 0.043
+      },
+      "qty": 190000,
+      "uom": "pcs",
+      "last_year_price_inr": 1750
+    },
+    {
+      "line_id": "L30",
+      "description": "3-ply RSC box 250×200×150, 120 GSM",
+      "spec": {
+        "ply": 3,
+        "gsm": 120,
+        "dims_mm": [
+          250,
+          200,
+          150
+        ],
+        "print": null,
+        "board_weight_kg_per_pc": 0.134
+      },
+      "qty": 165000,
+      "uom": "pcs",
+      "last_year_price_inr": 5400
+    }
+  ]
+}

@@ -27,6 +27,7 @@ ReviewKind = Literal[
     "missing_freight",
     "unmatched",
     "currency_mismatch",
+    "carry_forward_unresolved",
 ]
 
 

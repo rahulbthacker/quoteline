@@ -1,0 +1,67 @@
+[
+  {
+    "vendor_id": "meridian",
+    "received_at": "2026-09-22T11:18:00+05:30",
+    "files": [
+      {
+        "path": "data/replies/meridian/Meridian_Offer_RFX-0147.xlsx",
+        "sha256": "a048181cff08019b7a2223ebdde3c9d4903878c0726fcc8bf03fef06c132370d"
+      }
+    ],
+    "attachments": [
+      {
+        "path": "data/attachments/Meridian_Spec_Sheet.pdf",
+        "sha256": "30b40045d4e1257f0245cf7a78a9b88d35632d6ff02da6278d5e7052e1678c2e"
+      }
+    ]
+  },
+  {
+    "vendor_id": "sribalaji",
+    "received_at": "2026-09-23T16:45:00+05:30",
+    "files": [
+      {
+        "path": "data/replies/sribalaji/SriBalaji_Quotation_SBC-Q-2026-311.pdf",
+        "sha256": "b2adaea4152229d13597b68bdc10bc5a430554be5909dada78aa4b087dff1ea4"
+      }
+    ],
+    "attachments": [
+      {
+        "path": "data/attachments/SriBalaji_Ink_MSDS.pdf",
+        "sha256": "634af16453c7fafab2a97d58ff1ad88667b44dec49f73fd7e14480cba44a9aa4"
+      }
+    ]
+  },
+  {
+    "vendor_id": "kaveri",
+    "received_at": "2026-09-25T10:07:00+05:30",
+    "files": [
+      {
+        "path": "data/replies/kaveri/Kaveri_Quote_Sep2026.docx",
+        "sha256": "b66d92d24b965e033ed08db55c7e98b031e8fce9ea611cbdec63a4b7d9a92bd1"
+      }
+    ],
+    "attachments": []
+  },
+  {
+    "vendor_id": "northbox",
+    "received_at": "2026-09-26T18:32:00+05:30",
+    "files": [
+      {
+        "path": "data/replies/northbox/NorthBox_ratecard.jpg",
+        "sha256": "506bd40a3a01d00c42849f1319f2df3c3fea9d95801ea7a5e7b5911c7de48d0e"
+      }
+    ],
+    "attachments": []
+  },
+  {
+    "vendor_id": "anand",
+    "received_at": "2026-09-24T14:02:00+05:30",
+    "files": [
+      {
+        "path": "data/replies/anand/Anand_reply.eml",
+        "sha256": "af01dfa6f0dcbfee4b0698933b2c5e34ed8584fcc37f969198b6abb065c33aaf"
+      }
+    ],
+    "attachments": []
+  }
+]

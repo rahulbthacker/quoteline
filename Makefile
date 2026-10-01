@@ -4,7 +4,7 @@ SHELL := /bin/bash
 # (cd x && ...) so that this PATH is the one used to find uv and npm.
 export PATH := /opt/homebrew/bin:$(PATH)
 
-.PHONY: help setup check-a api web test lint
+.PHONY: help setup seed check-a api web test
 
 help:
 	@grep -E '^[a-z-]+:.*##' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-10s %s\n", $$1, $$2}'
@@ -12,6 +12,9 @@ help:
 setup: ## Install backend (uv, Python 3.12) and frontend (npm) dependencies
 	cd backend && uv sync
 	cd frontend && npm install
+
+seed: ## Regenerate the RFx, the five vendor replies, attachments and golden set (deterministic)
+	cd backend && uv run python ../data/gen/seed.py
 
 check-a: ## Checkpoint A: one live traced call per role across both providers
 	cd backend && uv run python -m app.llm.check

@@ -1,0 +1,734 @@
+{
+  "vendor_id": "northbox",
+  "vendor_name": "NorthBox Ltd",
+  "format": "image",
+  "received_at": "2026-09-26T18:32:00+05:30",
+  "files": [
+    "NorthBox_ratecard.jpg"
+  ],
+  "currency": "INR",
+  "lines_quoted_count": 27,
+  "freight": {
+    "kind": "lump_sum",
+    "amount_inr": 410000,
+    "statement": "Transport extra: ₹4,10,000 for the full contract quantity, delivery Chakan.",
+    "locator": "rate card footer"
+  },
+  "expected_review_items": [
+    {
+      "kind": "ocr_disagreement",
+      "lines": [
+        "L05"
+      ],
+      "why": "tens digit is blotted: 3,935 or 3,985"
+    },
+    {
+      "kind": "not_quoted",
+      "lines": [
+        "L08",
+        "L26",
+        "L27"
+      ],
+      "why": "rows absent from the rate card"
+    }
+  ],
+  "quality_result": "Fail",
+  "questionnaire": [
+    {
+      "question_id": "Q1",
+      "mandatory": true,
+      "expected": "unanswered",
+      "evidence": "ISO 9001:2015",
+      "locator": "rate card footer"
+    },
+    {
+      "question_id": "Q2",
+      "mandatory": true,
+      "expected": "unanswered",
+      "evidence": "Water based flexo inks",
+      "locator": "rate card footer"
+    },
+    {
+      "question_id": "Q3",
+      "mandatory": true,
+      "expected": "fail",
+      "evidence": "Works: single unit at Bhiwandi, Dist. Thane",
+      "locator": "rate card footer"
+    },
+    {
+      "question_id": "Q4",
+      "mandatory": false,
+      "expected": "answered",
+      "evidence": "Delivery 7 days",
+      "locator": "rate card footer"
+    },
+    {
+      "question_id": "Q5",
+      "mandatory": false,
+      "expected": "unanswered",
+      "evidence": null,
+      "locator": null
+    },
+    {
+      "question_id": "Q6",
+      "mandatory": false,
+      "expected": "answered",
+      "evidence": "Payment 30 days",
+      "locator": "rate card footer"
+    },
+    {
+      "question_id": "Q7",
+      "mandatory": false,
+      "expected": "unanswered",
+      "evidence": null,
+      "locator": null
+    },
+    {
+      "question_id": "Q8",
+      "mandatory": false,
+      "expected": "unanswered",
+      "evidence": null,
+      "locator": null
+    }
+  ],
+  "lines": [
+    {
+      "line_id": "L01",
+      "quoted": true,
+      "how": "explicit",
+      "raw_value": 5365,
+      "raw_unit": "per_100",
+      "raw_currency": "INR",
+      "raw_text": "5,365",
+      "locator": "rate card row Sr 1",
+      "bbox_px": [
+        1446,
+        569,
+        1747,
+        693
+      ],
+      "vendor_description": "RSC Box 600x400x400 5 / 150",
+      "normalised_inr_per_1000": 53650,
+      "true_inr_per_1000": 53650,
+      "expected_state": "confident",
+      "notes": []
+    },
+    {
+      "line_id": "L02",
+      "quoted": true,
+      "how": "explicit",
+      "raw_value": 1310,
+      "raw_unit": "per_100",
+      "raw_currency": "INR",
+      "raw_text": "1,310",
+      "locator": "rate card row Sr 2",
+      "bbox_px": [
+        1459,
+        621,
+        1760,
+        745
+      ],
+      "vendor_description": "RSC Box 400x300x300 3 / 120",
+      "normalised_inr_per_1000": 13100,
+      "true_inr_per_1000": 13100,
+      "expected_state": "confident",
+      "notes": []
+    },
+    {
+      "line_id": "L03",
+      "quoted": true,
+      "how": "explicit",
+      "raw_value": 1710,
+      "raw_unit": "per_100",
+      "raw_currency": "INR",
+      "raw_text": "1,710",
+      "locator": "rate card row Sr 3",
+      "bbox_px": [
+        1472,
+        672,
+        1773,
+        796
+      ],
+      "vendor_description": "Tray die-cut 500x350x120 5 / 150",
+      "normalised_inr_per_1000": 17100,
+      "true_inr_per_1000": 17100,
+      "expected_state": "confident",
+      "notes": []
+    },
+    {
+      "line_id": "L04",
+      "quoted": true,
+      "how": "explicit",
+      "raw_value": 11295,
+      "raw_unit": "per_100",
+      "raw_currency": "INR",
+      "raw_text": "11,295",
+      "locator": "rate card row Sr 4",
+      "bbox_px": [
+        1485,
+        723,
+        1786,
+        848
+      ],
+      "vendor_description": "Export Carton HD 650x450x450 7 / 180",
+      "normalised_inr_per_1000": 112950,
+      "true_inr_per_1000": 112950,
+      "expected_state": "confident",
+      "notes": []
+    },
+    {
+      "line_id": "L05",
+      "quoted": true,
+      "how": "explicit",
+      "raw_value": 3935.0,
+      "raw_unit": "per_100",
+      "raw_currency": "INR",
+      "raw_text": "3,935",
+      "locator": "rate card row Sr 5",
+      "bbox_px": [
+        1497,
+        775,
+        1799,
+        899
+      ],
+      "vendor_description": "Plain Sheet 1200x1000 5 / 150",
+      "normalised_inr_per_1000": 39350.0,
+      "true_inr_per_1000": 39350.0,
+      "expected_state": "needs_review",
+      "notes": []
+    },
+    {
+      "line_id": "L06",
+      "quoted": true,
+      "how": "explicit",
+      "raw_value": 775,
+      "raw_unit": "per_100",
+      "raw_currency": "INR",
+      "raw_text": "775",
+      "locator": "rate card row Sr 6",
+      "bbox_px": [
+        1510,
+        826,
+        1811,
+        950
+      ],
+      "vendor_description": "Partition Set 12 cell for 400x300x300 3 / 120",
+      "normalised_inr_per_1000": 7750,
+      "true_inr_per_1000": 7750,
+      "expected_state": "confident",
+      "notes": []
+    },
+    {
+      "line_id": "L07",
+      "quoted": true,
+      "how": "explicit",
+      "raw_value": 605,
+      "raw_unit": "per_100",
+      "raw_currency": "INR",
+      "raw_text": "605",
+      "locator": "rate card row Sr 7",
+      "bbox_px": [
+        1523,
+        878,
+        1824,
+        1002
+      ],
+      "vendor_description": "Mailer Box, 1 col print 250x200x100 3 / 120",
+      "normalised_inr_per_1000": 6050,
+      "true_inr_per_1000": 6050,
+      "expected_state": "confident",
+      "notes": []
+    },
+    {
+      "line_id": "L08",
+      "quoted": false,
+      "how": "not_quoted",
+      "raw_value": null,
+      "raw_unit": null,
+      "raw_currency": null,
+      "raw_text": null,
+      "locator": null,
+      "bbox_px": null,
+      "vendor_description": null,
+      "normalised_inr_per_1000": null,
+      "true_inr_per_1000": null,
+      "expected_state": "not_quoted",
+      "notes": []
+    },
+    {
+      "line_id": "L09",
+      "quoted": true,
+      "how": "explicit",
+      "raw_value": 600,
+      "raw_unit": "per_100",
+      "raw_currency": "INR",
+      "raw_text": "600",
+      "locator": "rate card row Sr 9",
+      "bbox_px": [
+        1536,
+        929,
+        1837,
+        1053
+      ],
+      "vendor_description": "RSC Box 300x200x200 3 / 120",
+      "normalised_inr_per_1000": 6000,
+      "true_inr_per_1000": 6000,
+      "expected_state": "confident",
+      "notes": []
+    },
+    {
+      "line_id": "L10",
+      "quoted": true,
+      "how": "explicit",
+      "raw_value": 1260,
+      "raw_unit": "per_100",
+      "raw_currency": "INR",
+      "raw_text": "1,260",
+      "locator": "rate card row Sr 10",
+      "bbox_px": [
+        1549,
+        981,
+        1850,
+        1105
+      ],
+      "vendor_description": "RSC Box, 1 col print 450x300x250 3 / 120",
+      "normalised_inr_per_1000": 12600,
+      "true_inr_per_1000": 12600,
+      "expected_state": "confident",
+      "notes": []
+    },
+    {
+      "line_id": "L11",
+      "quoted": true,
+      "how": "explicit",
+      "raw_value": 940,
+      "raw_unit": "per_100",
+      "raw_currency": "INR",
+      "raw_text": "940",
+      "locator": "rate card row Sr 11",
+      "bbox_px": [
+        1562,
+        1032,
+        1863,
+        1156
+      ],
+      "vendor_description": "RSC Box, 2 col print 350x250x200 3 / 140",
+      "normalised_inr_per_1000": 9400,
+      "true_inr_per_1000": 9400,
+      "expected_state": "confident",
+      "notes": []
+    },
+    {
+      "line_id": "L12",
+      "quoted": true,
+      "how": "explicit",
+      "raw_value": 600,
+      "raw_unit": "per_100",
+      "raw_currency": "INR",
+      "raw_text": "600",
+      "locator": "rate card row Sr 12",
+      "bbox_px": [
+        1574,
+        1083,
+        1875,
+        1207
+      ],
+      "vendor_description": "SRP Tray die-cut, 2 col print 400x300x100 3 / 140",
+      "normalised_inr_per_1000": 6000,
+      "true_inr_per_1000": 6000,
+      "expected_state": "confident",
+      "notes": []
+    },
+    {
+      "line_id": "L13",
+      "quoted": true,
+      "how": "explicit",
+      "raw_value": 175,
+      "raw_unit": "per_100",
+      "raw_currency": "INR",
+      "raw_text": "175",
+      "locator": "rate card row Sr 13",
+      "bbox_px": [
+        1587,
+        1135,
+        1888,
+        1259
+      ],
+      "vendor_description": "Layer Pad 390x290 3 / 120",
+      "normalised_inr_per_1000": 1750,
+      "true_inr_per_1000": 1750,
+      "expected_state": "confident",
+      "notes": []
+    },
+    {
+      "line_id": "L14",
+      "quoted": true,
+      "how": "explicit",
+      "raw_value": 1210,
+      "raw_unit": "per_100",
+      "raw_currency": "INR",
+      "raw_text": "1,210",
+      "locator": "rate card row Sr 14",
+      "bbox_px": [
+        1600,
+        1186,
+        1901,
+        1310
+      ],
+      "vendor_description": "Plain Sheet 1000x800 3 / 120",
+      "normalised_inr_per_1000": 12100,
+      "true_inr_per_1000": 12100,
+      "expected_state": "confident",
+      "notes": []
+    },
+    {
+      "line_id": "L15",
+      "quoted": true,
+      "how": "explicit",
+      "raw_value": 4385,
+      "raw_unit": "per_100",
+      "raw_currency": "INR",
+      "raw_text": "4,385",
+      "locator": "rate card row Sr 15",
+      "bbox_px": [
+        1613,
+        1238,
+        1914,
+        1362
+      ],
+      "vendor_description": "RSC Box, 1 col print 500x400x300 5 / 150",
+      "normalised_inr_per_1000": 43850,
+      "true_inr_per_1000": 43850,
+      "expected_state": "confident",
+      "notes": []
+    },
+    {
+      "line_id": "L16",
+      "quoted": true,
+      "how": "explicit",
+      "raw_value": 3790,
+      "raw_unit": "per_100",
+      "raw_currency": "INR",
+      "raw_text": "3,790",
+      "locator": "rate card row Sr 16",
+      "bbox_px": [
+        1626,
+        1289,
+        1927,
+        1413
+      ],
+      "vendor_description": "RSC Box 450x350x350 5 / 150",
+      "normalised_inr_per_1000": 37900,
+      "true_inr_per_1000": 37900,
+      "expected_state": "confident",
+      "notes": []
+    },
+    {
+      "line_id": "L17",
+      "quoted": true,
+      "how": "explicit",
+      "raw_value": 4640,
+      "raw_unit": "per_100",
+      "raw_currency": "INR",
+      "raw_text": "4,640",
+      "locator": "rate card row Sr 17",
+      "bbox_px": [
+        1639,
+        1341,
+        1940,
+        1465
+      ],
+      "vendor_description": "RSC Box, 2 col print 550x350x300 5 / 180",
+      "normalised_inr_per_1000": 46400,
+      "true_inr_per_1000": 46400,
+      "expected_state": "confident",
+      "notes": []
+    },
+    {
+      "line_id": "L18",
+      "quoted": true,
+      "how": "explicit",
+      "raw_value": 4275,
+      "raw_unit": "per_100",
+      "raw_currency": "INR",
+      "raw_text": "4,275",
+      "locator": "rate card row Sr 18",
+      "bbox_px": [
+        1651,
+        1392,
+        1952,
+        1516
+      ],
+      "vendor_description": "RSC Box 400x400x400 5 / 150",
+      "normalised_inr_per_1000": 42750,
+      "true_inr_per_1000": 42750,
+      "expected_state": "confident",
+      "notes": []
+    },
+    {
+      "line_id": "L19",
+      "quoted": true,
+      "how": "explicit",
+      "raw_value": 6675,
+      "raw_unit": "per_100",
+      "raw_currency": "INR",
+      "raw_text": "6,675",
+      "locator": "rate card row Sr 19",
+      "bbox_px": [
+        1664,
+        1443,
+        1965,
+        1567
+      ],
+      "vendor_description": "RSC Box 700x450x350 5 / 180",
+      "normalised_inr_per_1000": 66750,
+      "true_inr_per_1000": 66750,
+      "expected_state": "confident",
+      "notes": []
+    },
+    {
+      "line_id": "L20",
+      "quoted": true,
+      "how": "explicit",
+      "raw_value": 3010,
+      "raw_unit": "per_100",
+      "raw_currency": "INR",
+      "raw_text": "3,010",
+      "locator": "rate card row Sr 20",
+      "bbox_px": [
+        1677,
+        1495,
+        1978,
+        1619
+      ],
+      "vendor_description": "Display Shipper, 2 col print 600x400x200 5 / 150",
+      "normalised_inr_per_1000": 30100,
+      "true_inr_per_1000": 30100,
+      "expected_state": "confident",
+      "notes": []
+    },
+    {
+      "line_id": "L21",
+      "quoted": true,
+      "how": "explicit",
+      "raw_value": 3305,
+      "raw_unit": "per_100",
+      "raw_currency": "INR",
+      "raw_text": "3,305",
+      "locator": "rate card row Sr 21",
+      "bbox_px": [
+        1690,
+        1546,
+        1991,
+        1670
+      ],
+      "vendor_description": "HSC Box (no top flaps) 600x400x300 5 / 150",
+      "normalised_inr_per_1000": 33050,
+      "true_inr_per_1000": 33050,
+      "expected_state": "confident",
+      "notes": []
+    },
+    {
+      "line_id": "L22",
+      "quoted": true,
+      "how": "explicit",
+      "raw_value": 2195,
+      "raw_unit": "per_100",
+      "raw_currency": "INR",
+      "raw_text": "2,195",
+      "locator": "rate card row Sr 22",
+      "bbox_px": [
+        1703,
+        1598,
+        2004,
+        1722
+      ],
+      "vendor_description": "Partition Set 6 cell for 600x400x400 5 / 150",
+      "normalised_inr_per_1000": 21950,
+      "true_inr_per_1000": 21950,
+      "expected_state": "confident",
+      "notes": []
+    },
+    {
+      "line_id": "L23",
+      "quoted": true,
+      "how": "explicit",
+      "raw_value": 3605,
+      "raw_unit": "per_100",
+      "raw_currency": "INR",
+      "raw_text": "3,605",
+      "locator": "rate card row Sr 23",
+      "bbox_px": [
+        1715,
+        1649,
+        2016,
+        1773
+      ],
+      "vendor_description": "Telescopic Box (base+lid) 500x300x150 5 / 150",
+      "normalised_inr_per_1000": 36050,
+      "true_inr_per_1000": 36050,
+      "expected_state": "confident",
+      "notes": []
+    },
+    {
+      "line_id": "L24",
+      "quoted": true,
+      "how": "explicit",
+      "raw_value": 9850,
+      "raw_unit": "per_100",
+      "raw_currency": "INR",
+      "raw_text": "9,850",
+      "locator": "rate card row Sr 24",
+      "bbox_px": [
+        1728,
+        1701,
+        2029,
+        1825
+      ],
+      "vendor_description": "Export Carton HD 600x450x400 7 / 180",
+      "normalised_inr_per_1000": 98500,
+      "true_inr_per_1000": 98500,
+      "expected_state": "confident",
+      "notes": []
+    },
+    {
+      "line_id": "L25",
+      "quoted": true,
+      "how": "explicit",
+      "raw_value": 9830,
+      "raw_unit": "per_100",
+      "raw_currency": "INR",
+      "raw_text": "9,830",
+      "locator": "rate card row Sr 25",
+      "bbox_px": [
+        1741,
+        1752,
+        2042,
+        1876
+      ],
+      "vendor_description": "Export Carton HD, 1 col print 600x400x450 7 / 180",
+      "normalised_inr_per_1000": 98300,
+      "true_inr_per_1000": 98300,
+      "expected_state": "confident",
+      "notes": []
+    },
+    {
+      "line_id": "L26",
+      "quoted": false,
+      "how": "not_quoted",
+      "raw_value": null,
+      "raw_unit": null,
+      "raw_currency": null,
+      "raw_text": null,
+      "locator": null,
+      "bbox_px": null,
+      "vendor_description": null,
+      "normalised_inr_per_1000": null,
+      "true_inr_per_1000": null,
+      "expected_state": "not_quoted",
+      "notes": []
+    },
+    {
+      "line_id": "L27",
+      "quoted": false,
+      "how": "not_quoted",
+      "raw_value": null,
+      "raw_unit": null,
+      "raw_currency": null,
+      "raw_text": null,
+      "locator": null,
+      "bbox_px": null,
+      "vendor_description": null,
+      "normalised_inr_per_1000": null,
+      "true_inr_per_1000": null,
+      "expected_state": "not_quoted",
+      "notes": []
+    },
+    {
+      "line_id": "L28",
+      "quoted": true,
+      "how": "explicit",
+      "raw_value": 1525,
+      "raw_unit": "per_100",
+      "raw_currency": "INR",
+      "raw_text": "1,525",
+      "locator": "rate card row Sr 28",
+      "bbox_px": [
+        1754,
+        1803,
+        2055,
+        1927
+      ],
+      "vendor_description": "Corner Post 80x80x5 L 900 -",
+      "normalised_inr_per_1000": 15250,
+      "true_inr_per_1000": 15250,
+      "expected_state": "confident",
+      "notes": []
+    },
+    {
+      "line_id": "L29",
+      "quoted": true,
+      "how": "explicit",
+      "raw_value": 165,
+      "raw_unit": "per_100",
+      "raw_currency": "INR",
+      "raw_text": "165",
+      "locator": "rate card row Sr 29",
+      "bbox_px": [
+        1767,
+        1855,
+        2068,
+        1979
+      ],
+      "vendor_description": "Insert Pad die-cut 380x280 3 / 120",
+      "normalised_inr_per_1000": 1650,
+      "true_inr_per_1000": 1650,
+      "expected_state": "confident",
+      "notes": []
+    },
+    {
+      "line_id": "L30",
+      "quoted": true,
+      "how": "explicit",
+      "raw_value": 495,
+      "raw_unit": "per_100",
+      "raw_currency": "INR",
+      "raw_text": "495",
+      "locator": "rate card row Sr 30",
+      "bbox_px": [
+        1780,
+        1906,
+        2081,
+        2030
+      ],
+      "vendor_description": "RSC Box 250x200x150 3 / 120",
+      "normalised_inr_per_1000": 4950,
+      "true_inr_per_1000": 4950,
+      "expected_state": "confident",
+      "notes": []
+    }
+  ],
+  "ambiguous_digit": {
+    "line_id": "L05",
+    "true": 3935,
+    "alt": 3985,
+    "digit_index": 2,
+    "digit_bbox_px": [
+      1730,
+      787,
+      1771,
+      834
+    ],
+    "readings": [
+      "3,935",
+      "3,985"
+    ]
+  },
+  "image_size": [
+    2400,
+    2900
+  ],
+  "skew_deg": 14.0,
+  "unit_statement": "Rates are per 100 pcs.",
+  "attachment": null
+}
