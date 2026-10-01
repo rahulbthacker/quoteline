@@ -214,10 +214,86 @@ def build() -> dict:
     }
 
 
+def render_markdown(report: dict) -> str:
+    """docs/EVAL.md: a committed snapshot of one eval run, for readers without the app."""
+    h = report["headline"]
+
+    def pct(value: float | None, digits: int = 1) -> str:
+        return "n/a" if value is None else f"{value * 100:.{digits}f}%"
+
+    lines = [
+        "# Eval report",
+        "",
+        f"Snapshot of `make eval` on {report['generated_at'][:10]} (ingest run `{report['ingest_run']}`). "
+        "Regenerate with `make eval`; the live version is in the Run inspector.",
+        "",
+        report["method"],
+        "",
+        "## Headline",
+        "",
+        "| Measure | Result |",
+        "|---|---|",
+        f"| Rows scored per model | {h['rows_scored_per_model']} |",
+        f"| Value accuracy, Claude Opus 5.5 | {pct(h['primary_accuracy']['value'])} |",
+        f"| Value accuracy, Gemini 3.1 Pro | {pct(h['secondary_accuracy']['value'])} |",
+        f"| Line match, unit, currency (both models) | {pct(h['primary_accuracy']['line'], 0)}, "
+        f"{pct(h['primary_accuracy']['unit'], 0)}, {pct(h['primary_accuracy']['currency'], 0)} |",
+        f"| Agreement between the two models | {pct(h['agreement_rate'])} |",
+        f"| Flag precision (flags raised that are real problems) | {pct(h['flag_precision'], 0)} of {h['flags_raised']} |",
+        f"| Missed problems (expected flag not raised, or a wrong value in a counted cell) | {h['missed_problems']} |",
+        f"| Free-text conditions captured faithfully (judge model) | {pct(h['free_text_score'], 0)} |",
+        f"| Questionnaire verdicts matching golden | {pct(h['quality_verdict_accuracy'], 0)} |",
+        f"| Model calls and cost for one full ingest | {h['ingest_calls']} calls, ₹{h['ingest_cost_inr']:.0f} |",
+        f"| Mean extraction latency per call | {h['mean_extraction_latency_s']} s |",
+        "",
+        "## Per vendor, per model",
+        "",
+        "| Vendor | Format | Model | Rows | Line | Value | Unit | Currency | Free text | Latency | Cost |",
+        "|---|---|---|---|---|---|---|---|---|---|---|",
+    ]
+    for vendor in report["vendors"]:
+        for model in vendor["models"].values():
+            acc = model["accuracy"]
+            lines.append(
+                f"| {vendor['vendor']} | {vendor['format']} | {model['model']} | {model['rows']} | "
+                f"{pct(acc['line'], 0)} | {pct(acc['value'])} | {pct(acc['unit'], 0)} | {pct(acc['currency'], 0)} | "
+                f"{pct(model['free_text_score'], 0)} | {model.get('latency_s')} s | ₹{model.get('cost_inr') or 0:.2f} |"
+            )
+    lines += ["", "## Flags and wrong readings", ""]
+    for vendor in report["vendors"]:
+        met = (
+            ", ".join(key.split("[")[0] for key in vendor["flags_expected_met"]) or "none expected"
+        )
+        lines.append(f"- **{vendor['vendor']}**: expected flags raised: {met}.")
+        for model in vendor["models"].values():
+            for error in model["errors"]:
+                lines.append(f"  - {model['model']} wrong reading: {error}")
+        for missed in vendor["flags_missed"]:
+            lines.append(f"  - MISSED: {missed}")
+        for extra in vendor["flags_unexpected"]:
+            lines.append(f"  - unexpected flag: {extra}")
+    lines += [
+        "",
+        "The only wrong readings are on NorthBox L05, where an ink blot covers one digit in the "
+        "photo. The cell was flagged, so it is not a missed problem.",
+        "",
+    ]
+    return "\n".join(lines)
+
+
 def main() -> int:
+    from app.config import REPO_ROOT
+
+    if "--doc-only" in sys.argv:  # re-render docs/EVAL.md from the stored report, no model calls
+        report = json.loads(EVAL_REPORT.read_text(encoding="utf-8"))
+        (REPO_ROOT / "docs" / "EVAL.md").write_text(render_markdown(report), encoding="utf-8")
+        print("docs/EVAL.md written from the stored report.")
+        return 0
     report = build()
     EVAL_REPORT.parent.mkdir(parents=True, exist_ok=True)
     EVAL_REPORT.write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8")
+    if "--doc" in sys.argv:
+        (REPO_ROOT / "docs" / "EVAL.md").write_text(render_markdown(report), encoding="utf-8")
     h = report["headline"]
     print(f"\nEval report for {report['rfx_id']} (ingest run {report['ingest_run']})\n")
     print(

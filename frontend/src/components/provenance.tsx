@@ -145,6 +145,11 @@ function Detail({ rfxId, detail, onClose }: { rfxId: string; detail: CellDetail;
               )}
             </div>
             <Snippet source={lead.source_ref} value={lead.raw_value} />
+            {vendor.format === 'image' && vendor.file_url && (
+              <a href={fileUrl(vendor.file_url)} target="_blank" rel="noreferrer">
+                <img src={fileUrl(vendor.file_url)} alt={`${vendor.file} as received`} className="max-h-[150px] w-full rounded-control border border-border object-cover object-top" />
+              </a>
+            )}
           </section>
         ) : (
           <section>

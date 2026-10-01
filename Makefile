@@ -49,7 +49,7 @@ check-e: ## Checkpoint E: ask the analyst six questions live and check them agai
 	cd backend && uv run python -m app.eval.checkpoint_e
 
 eval: ## Full eval: re-read the five replies live, then score against golden and run the judge
-	cd backend && uv run python -m app.cli load-rfx && uv run python -m app.cli deliver && uv run python -m app.cli ingest && uv run python -m app.eval.report
+	cd backend && uv run python -m app.cli load-rfx && uv run python -m app.cli deliver && uv run python -m app.cli ingest && uv run python -m app.eval.report --doc
 
 check-a: ## Checkpoint A: one live traced call per role across both providers
 	cd backend && uv run python -m app.llm.check
