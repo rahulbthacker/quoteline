@@ -13,10 +13,6 @@ def build_client(provider: Provider, settings: Settings) -> ProviderClient:
         from app.llm.providers.anthropic_client import AnthropicClient
 
         return AnthropicClient(key)
-    if provider == "gemini":
-        from app.llm.providers.gemini_client import GeminiClient
+    from app.llm.providers.gemini_client import GeminiClient
 
-        return GeminiClient(key)
-    from app.llm.providers.openai_client import OpenAIClient
-
-    return OpenAIClient(key)
+    return GeminiClient(key)

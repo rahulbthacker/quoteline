@@ -13,12 +13,11 @@ this file records decisions as they are made so they are not reconstructed from 
 | D4 | Default chains have one model per role; the extractors do not fall back to each other. | If the primary fell back to the secondary's model, "two models agree" would be one model agreeing with itself. |
 | D5 | Cost comes from `app/llm/pricing.yaml`; a model with no entry is traced as unpriced. | A guessed price is a fabricated number. |
 | D6 | No server-side refusal fallback on Claude calls. | A silent model switch would make the traced model wrong. A refusal is traced as a failure and goes down the configured chain. |
+| D8 | OpenAI is out of scope (Rahul, 1 Oct). Two providers: Anthropic and Gemini. Image reads lead with Gemini; routing, analysis, judging and clarification run on Claude. | Owner's call. Consequence: the eval judge shares a family with the primary extractor. It grades free-text against exact golden truth, which limits self-preference, and the note says so. |
+| D9 | The conditional 4% footnote discount sits on Sri Balaji's PDF, as the brief's dataset table says. The mockups show it on Kaveri; the mockups are a visual reference, the brief is the spec. | Rahul: go with what the case study asks for. |
 | D7 | There is no offline mode. Without a key, the call fails and the failure is traced. | Non-negotiable 1. |
 
 ## Open questions for Rahul
 
-1. The brief puts the conditional 4% footnote discount on **Sri Balaji** (PDF). The mockups
-   (`design/reference/review-queue.html`, `main.html`) show it on **Kaveri** (DOCX, footnote 2).
-   Checkpoint C also requires Sri Balaji at 100% on golden. Which vendor carries the footnote?
-2. The brief lists seven ReviewItem kinds; validation and the line matcher also need
+1. The brief lists seven ReviewItem kinds; validation and the line matcher also need
    `unmatched` and `currency_mismatch`. Added to the schema; say if they should fold into others.

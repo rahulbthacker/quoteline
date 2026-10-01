@@ -14,26 +14,25 @@ def test_parse_chain_orders_fallbacks():
     ]
 
 
-@pytest.mark.parametrize("bad", ["", "claude-opus-5-5", "mistral:large", "openai:"])
+@pytest.mark.parametrize("bad", ["", "claude-opus-5-5", "openai:gpt-5.6-sol", "gemini:"])
 def test_parse_chain_rejects_bad_specs(bad):
     with pytest.raises(ValueError):
         parse_chain(bad)
 
 
-def test_default_roles_cover_three_providers():
+def test_default_roles_cover_both_providers():
     settings = Settings(_env_file=None)
     providers = {
         spec.provider
         for role in ("EXTRACT_PRIMARY", "EXTRACT_SECONDARY", "JUDGE", "ROUTER", "ANALYST")
         for spec in settings.chain(role)
     }
-    assert providers == {"anthropic", "gemini", "openai"}
-    # The judge must not share a family with either extractor.
-    judge = settings.chain("JUDGE")[0].provider
-    assert judge not in {
-        settings.chain("EXTRACT_PRIMARY")[0].provider,
-        settings.chain("EXTRACT_SECONDARY")[0].provider,
-    }
+    assert providers == {"anthropic", "gemini"}
+    # Dual-model agreement only means something if the two extractors are different families.
+    assert (
+        settings.chain("EXTRACT_PRIMARY")[0].provider
+        != settings.chain("EXTRACT_SECONDARY")[0].provider
+    )
 
 
 def test_cost_uses_longest_prefix_and_long_prompt_tier():

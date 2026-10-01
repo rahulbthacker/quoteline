@@ -13,10 +13,10 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 BACKEND_ROOT = REPO_ROOT / "backend"
 VAR_DIR = BACKEND_ROOT / "var"
 
-Provider = Literal["anthropic", "gemini", "openai"]
+Provider = Literal["anthropic", "gemini"]
 Role = Literal["EXTRACT_PRIMARY", "EXTRACT_SECONDARY", "JUDGE", "ROUTER", "ANALYST"]
 ROLES: tuple[Role, ...] = ("EXTRACT_PRIMARY", "EXTRACT_SECONDARY", "JUDGE", "ROUTER", "ANALYST")
-PROVIDERS: tuple[Provider, ...] = ("anthropic", "gemini", "openai")
+PROVIDERS: tuple[Provider, ...] = ("anthropic", "gemini")
 
 
 @dataclass(frozen=True)
@@ -52,11 +52,10 @@ class Settings(BaseSettings):
 
     anthropic_api_key: str = ""
     gemini_api_key: str = ""
-    openai_api_key: str = ""
 
     extract_primary: str = "anthropic:claude-opus-5-5"
     extract_secondary: str = "gemini:gemini-3.1-pro-preview"
-    judge: str = "openai:gpt-5.6-sol"
+    judge: str = "anthropic:claude-opus-5-5"
     router: str = "anthropic:claude-haiku-4-5"
     analyst: str = "anthropic:claude-opus-5-5"
 

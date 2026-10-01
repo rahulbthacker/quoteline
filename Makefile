@@ -13,7 +13,7 @@ setup: ## Install backend (uv, Python 3.12) and frontend (npm) dependencies
 	cd backend && uv sync
 	cd frontend && npm install
 
-check-a: ## Checkpoint A: one live traced call per role across all three providers
+check-a: ## Checkpoint A: one live traced call per role across both providers
 	cd backend && uv run python -m app.llm.check
 
 api: ## Run the FastAPI backend on :8000

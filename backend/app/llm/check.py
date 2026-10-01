@@ -1,4 +1,4 @@
-"""Checkpoint A: one live, traced call per configured role, covering all three providers.
+"""Checkpoint A: one live, traced call per configured role, covering both providers.
 
 Run with `make check-a`. Exits non-zero unless every provider answers and every call is traced.
 Each ping carries a fresh nonce the model must echo back in structured output, so a pass can
@@ -25,7 +25,7 @@ PROMPT_VERSION = "connectivity_check_v1"
 
 class Ping(BaseModel):
     nonce: str = Field(description="The nonce from the request, copied exactly")
-    model_family: str = Field(description="The family of model answering: Claude, Gemini or GPT")
+    model_family: str = Field(description="The family of model answering: Claude or Gemini")
 
 
 def main() -> int:
@@ -79,7 +79,7 @@ def main() -> int:
     for problem in problems:
         print(f"FAIL  {problem}")
     if not problems and not missing:
-        print("Checkpoint A passed: all three providers answered with a traced call.")
+        print("Checkpoint A passed: both providers answered with a traced call on every role.")
         return 0
     not_configured = [p for p in missing if p not in configured]
     if not_configured:

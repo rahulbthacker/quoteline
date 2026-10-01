@@ -37,10 +37,11 @@ Demo scale: 5 vendors, 30 line items, 8-question questionnaire, 3 attached docum
 
 - **Backend:** Python 3.12, FastAPI, SQLite via SQLAlchemy for app state, DuckDB for the normalised quote table (the analyst queries it), Pydantic for every schema.
 - **Frontend:** Vite, React 18, TypeScript, Tailwind v4, shadcn/ui, TanStack Table v8, TanStack Query, Recharts, Lucide, Sonner. Fonts: Geist and Geist Mono via Google Fonts with system fallbacks.
-- **Models** (env-configurable, all three keys expected):
+- **Models** (env-configurable; two providers, Anthropic and Gemini. OpenAI was removed from scope by Rahul on 2026-10-01):
   - `EXTRACT_PRIMARY` = Claude Opus 5.5 (`claude-opus-5-5`)
-  - `EXTRACT_SECONDARY` = Gemini 3.1 Pro (image and photo reads lead here)
-  - `JUDGE` = GPT-5.6 Sol (eval harness only; different family from the extractor)
+  - `EXTRACT_SECONDARY` = Gemini 3.1 Pro (`gemini-3.1-pro-preview`; image and photo reads lead here)
+  - `JUDGE` = Claude Opus 5.5 (eval harness only; grades free-text fields against golden. Shares a family with the primary extractor now that OpenAI is out of scope; say so in the note)
+  - Rule of thumb from Rahul: image-related work goes to Gemini, execution-related work (routing, analysis, judging, clarification) goes to Anthropic.
   - `ROUTER` = Claude Haiku 4.5
   - `ANALYST` = Claude Opus 5.5
   - Fallback chain per role is a config list; a failed call is retried once, then the item is flagged `needs_review` with reason `model_error`, never silently dropped.
@@ -173,7 +174,7 @@ Persona switcher in the top bar changes what is visible and editable; it is a de
 
 Build in this sequence. Each checkpoint is a hard gate: do not start the next block until it passes. No clock: move as fast as the gates allow.
 
-1. Repo scaffold, tokens, Makefile, schemas, LLM clients with tracing. **Checkpoint A:** one traced call to each of the three providers succeeds.
+1. Repo scaffold, tokens, Makefile, schemas, LLM clients with tracing. **Checkpoint A:** one traced call to each of the two providers succeeds (every role answers).
 2. Dataset generators and golden set. **Checkpoint B:** `make seed` produces the RFx and the five reply files; golden JSON matches the generators; every file opens in its native app.
 3. Ingestion router, parsers, extraction agent (dual model), line matcher. **Checkpoint C:** all five replies extract; Meridian and Sri Balaji at 100% on golden; Kaveri, NorthBox and Anand raise their expected flags. This is the gate that proves the AI loops are real.
 4. Normalization, validation, review items, grid endpoint. **Checkpoint D:** `GET /grid` returns 150 cells with correct states; totals exclude flagged and not-quoted lines.

@@ -25,6 +25,8 @@ class GeminiClient:
         config = types.GenerateContentConfig(
             system_instruction=req.system,
             max_output_tokens=req.max_tokens,
+            # No tools are ever passed; this only silences the SDK's AFC notice.
+            automatic_function_calling=types.AutomaticFunctionCallingConfig(disable=True),
         )
         if req.output_schema is not None:
             config.response_mime_type = "application/json"
