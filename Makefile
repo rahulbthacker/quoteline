@@ -5,7 +5,7 @@ SHELL := /bin/bash
 export PATH := /opt/homebrew/bin:$(PATH)
 PORT ?= 8000
 
-.PHONY: help setup demo serve seed reset send inbox ingest check-a check-c check-e eval api web test
+.PHONY: help setup demo serve rehearse seed reset send inbox ingest check-a check-c check-e eval api web test
 
 help:
 	@grep -E '^[a-z-]+:.*##' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-10s %s\n", $$1, $$2}'
@@ -22,6 +22,9 @@ demo: setup ## One command: seed state, send the RFx, receive and read the five 
 serve: ## Serve the API and the built frontend on http://localhost:8000 (no reset, no model calls)
 	cd frontend && npm run build --silent
 	cd backend && uv run python -m app.cli serve --open --port $(PORT)
+
+rehearse: ## Undo every human decision (review, overrides, scenarios, award) but keep the readings
+	cd backend && uv run python -m app.cli clear-decisions
 
 setup: ## Install backend (uv, Python 3.12) and frontend (npm) dependencies
 	cd backend && uv sync --quiet

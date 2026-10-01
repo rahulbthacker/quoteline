@@ -5,6 +5,8 @@ five files were read by two models during `make demo`, and every answer below is
 while you record. Figures can differ slightly between runs, so read them off the screen
 rather than from this script.
 
+**To rehearse:** `make rehearse` undoes every decision you made (review items, overrides, scenarios, the award) and keeps the readings, so you can run the script again without re-reading the files. Then `make serve`.
+
 **Before recording:** run `make demo` (about two minutes, about ₹170 of model spend) and wait
 for the browser to open on Compare. Set the window to roughly 1440 × 900. Stay in the Category
 buyer persona until step 8.

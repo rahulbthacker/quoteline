@@ -98,7 +98,7 @@ def compute(result: GridResult, filters: ScenarioFilters, single_vendor: str | N
     ]  # fmt: skip
     if overridden:
         rules.append(
-            f"Buyer overrides ({len(overridden)}) are carried with their reasons: {', '.join(overridden)}"
+            f"Buyer overrides and exclusions ({len(overridden)}) are carried with their reasons: {', '.join(overridden)}"
         )
 
     allocated = set(allocation)

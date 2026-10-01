@@ -33,6 +33,7 @@ calls fail and say so.
 |---|---|---|
 | `make demo` | Everything above, from a clean state | yes |
 | `make serve` | Serve the app again without resetting or re-reading | no |
+| `make rehearse` | Undo every decision (review, overrides, scenarios, award) and keep the readings, to run the walkthrough again | no |
 | `make test` | 92 backend tests, lint, frontend type-check and build | no |
 | `make seed` | Regenerate the RFx, the five replies and the golden set (byte-deterministic) | no |
 | `make check-a` | One traced call per role on both providers | yes |

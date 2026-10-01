@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 
+from app.models import VendorQualityRow
 from app.services import ingest, mail_stub
 
 RFX_ID = "RFX-0147"
@@ -22,6 +23,7 @@ def main() -> None:
     run.add_argument("--vendor", action="append")
     run.add_argument("--json", action="store_true", help="also print the full summary as JSON")
     sub.add_parser("reverify", help="re-run the source check on stored readings (no model calls)")
+    sub.add_parser("clear-decisions", help="undo every human decision, keep the readings")
     sub.add_parser("reset", help="delete all app state (database, snapshots, inbox, outbox)")
     sub.add_parser("send", help="send the RFx to every vendor (writes .eml files to mail/outbox)")
     serve = sub.add_parser("serve", help="serve the API and the built frontend on one port")
@@ -53,6 +55,28 @@ def main() -> None:
                 if path.name != ".gitkeep":
                     shutil.rmtree(path) if path.is_dir() else path.unlink()
         print("State cleared: database, snapshots, inbox and outbox.")
+        return
+    if args.command == "clear-decisions":
+        from sqlalchemy import delete
+
+        from app.db import init_db, session_scope
+        from app.models import (
+            AnalysisRow,
+            AuditEventRow,
+            AwardRow,
+            CellDecisionRow,
+            ReviewItemRow,
+            ScenarioRow,
+        )
+
+        init_db()
+        with session_scope() as session:
+            for table in (ReviewItemRow, CellDecisionRow, ScenarioRow, AwardRow, AnalysisRow):
+                session.execute(delete(table))
+            session.execute(delete(AuditEventRow).where(AuditEventRow.actor_kind == "user"))
+            session.execute(VendorQualityRow.__table__.update().values(overrides={}))
+        print("Cleared every human decision (review, overrides, scenarios, award, questions).")
+        print("The readings from the last ingest are untouched; no model was called.")
         return
     if args.command == "reverify":
         from sqlalchemy import select
