@@ -290,10 +290,7 @@ def _annotation(reading: LineReading, vision: bool) -> str | None:
         return "from ₹/kg"
     if units.is_ambiguous(lead.unit_code):
         return f"{UNIT_LABEL[lead.unit_code]}?"
-    if lead.raw_currency and lead.raw_currency != "INR":
-        return f"from {lead.raw_currency}"
-    if vision:
-        return "read from photo"
+    # Currency and photo are vendor-wide and already in the column header.
     return None
 
 

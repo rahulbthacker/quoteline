@@ -63,6 +63,13 @@ def list_rfx() -> list[dict]:
         ]  # fmt: skip
 
 
+@router.get("/intake/sample")
+def intake_sample() -> dict:
+    """A buyer's rough notes for the demo RFx, to paste to the co-pilot. Written by `make seed`."""
+    path = REPO_ROOT / "data" / "rfx" / "intake_notes.txt"
+    return {"text": path.read_text(encoding="utf-8") if path.is_file() else ""}
+
+
 @router.post("/intake/chat")
 def intake_chat(body: ChatRequest, who: Who) -> dict:
     require(who, "buyer")

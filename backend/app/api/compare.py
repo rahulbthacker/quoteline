@@ -11,7 +11,7 @@ from sqlalchemy import select
 
 from app.api.deps import persona, require
 from app.db import session_scope
-from app.models import AuditEventRow, VendorQualityRow
+from app.models import AuditEventRow, AwardRow, OutboxRow, RfxRow, ScenarioRow, VendorQualityRow
 from app.schemas import Grid, ReviewItem
 from app.services import audit, export, grid, outbound, review
 
@@ -46,6 +46,34 @@ def _build(rfx_id: str) -> grid.GridResult:
         return grid.build(rfx_id)
     except KeyError:
         raise HTTPException(404, f"RFx {rfx_id} not found") from None
+
+
+@router.get("/rfx/{rfx_id}/overview")
+def overview(rfx_id: str) -> dict:
+    """What the shell needs to draw the stage stepper: where this RFx stands."""
+    result = _build(rfx_id)
+    g = result.grid
+    with session_scope() as session:
+        rfx_row = session.get(RfxRow, rfx_id)
+        sent = session.scalars(
+            select(OutboxRow.id).where(OutboxRow.rfx_id == rfx_id, OutboxRow.kind == "rfx")
+        ).all()
+        scenarios = session.scalars(
+            select(ScenarioRow.id).where(ScenarioRow.rfx_id == rfx_id)
+        ).all()
+        award = session.scalars(
+            select(AwardRow).where(AwardRow.rfx_id == rfx_id).order_by(AwardRow.updated_at.desc())
+        ).first()
+        award_status = award.status if award else None
+        status = rfx_row.status
+    return {
+        "rfx_id": rfx_id, "title": g.title, "status": status, "lines": len(g.lines),
+        "vendors": len(g.vendors), "sent": len(sent),
+        "replies": sum(1 for v in g.vendors if v.has_reply),
+        "review_open": g.review_open, "review_total": len(result.items),
+        "cells_in_review": g.review_blocking_cells, "overrides": g.counts["overridden"],
+        "scenarios": len(scenarios), "award_status": award_status, "run": g.run.model_dump(),
+    }  # fmt: skip
 
 
 @router.get("/rfx/{rfx_id}/grid", response_model=Grid)

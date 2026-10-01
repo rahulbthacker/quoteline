@@ -4,14 +4,27 @@ SHELL := /bin/bash
 # (cd x && ...) so that this PATH is the one used to find uv and npm.
 export PATH := /opt/homebrew/bin:$(PATH)
 
-.PHONY: help setup seed reset send inbox ingest check-a check-c check-e api web test
+.PHONY: help setup demo serve seed reset send inbox ingest check-a check-c check-e eval api web test
 
 help:
 	@grep -E '^[a-z-]+:.*##' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-10s %s\n", $$1, $$2}'
 
+demo: setup ## One command: seed state, send the RFx, receive and read the five replies, open the UI
+	@test -f .env || { echo "Create .env from .env.example with ANTHROPIC_API_KEY and GEMINI_API_KEY first."; exit 1; }
+	cd backend && uv run python -m app.cli reset
+	cd backend && uv run python -m app.cli send
+	cd backend && uv run python -m app.cli deliver
+	cd backend && uv run python -m app.cli ingest
+	cd frontend && npm run build --silent
+	cd backend && uv run python -m app.cli serve --open
+
+serve: ## Serve the API and the built frontend on http://localhost:8000 (no reset, no model calls)
+	cd frontend && npm run build --silent
+	cd backend && uv run python -m app.cli serve --open
+
 setup: ## Install backend (uv, Python 3.12) and frontend (npm) dependencies
-	cd backend && uv sync
-	cd frontend && npm install
+	cd backend && uv sync --quiet
+	cd frontend && npm install --silent --no-audit --no-fund
 
 seed: ## Regenerate the RFx, the five vendor replies, attachments and golden set (deterministic)
 	cd backend && uv run python ../data/gen/seed.py
@@ -33,6 +46,9 @@ check-c: ## Checkpoint C: score the stored extractions and flags against the gol
 
 check-e: ## Checkpoint E: ask the analyst six questions live and check them against the award engine
 	cd backend && uv run python -m app.eval.checkpoint_e
+
+eval: ## Full eval: re-read the five replies live, then score against golden and run the judge
+	cd backend && uv run python -m app.cli load-rfx && uv run python -m app.cli deliver && uv run python -m app.cli ingest && uv run python -m app.eval.report
 
 check-a: ## Checkpoint A: one live traced call per role across both providers
 	cd backend && uv run python -m app.llm.check

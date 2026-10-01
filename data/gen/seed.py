@@ -79,6 +79,28 @@ def build_rfx() -> dict:
     return rfx
 
 
+def intake_notes() -> str:
+    """A buyer's rough notes: what they would paste to the co-pilot to draft this RFx."""
+    last_year = c.last_year_prices()
+    rows = []
+    for line in c.LINES:
+        text = line.description.replace("×", "x").replace("-ply", " ply").replace(" GSM", "gsm")
+        text = text.replace("printed 1 colour", "1 col print").replace("printed 2 colour", "2 col print")
+        price = last_year[line.line_id]
+        ly = f"LY {price:,.0f}/1000" if price is not None else "new item, no LY price"
+        rows.append(f"- {text} - {line.qty:,} {'sets' if line.uom == 'sets' else 'nos'} ({ly})")
+    return (
+        "Need to float the Q4 2026 corrugated packaging RFx for the Chakan plant. Annual "
+        "quantities below, with last year's contract rates where we have them. Prices to come "
+        "back in INR per 1,000, GST and freight separate. Payment 60 days from GRN, delivered "
+        "Chakan on weekly schedules, offers valid 60 days.\n\n"
+        "BRC or an equivalent food-safety certification is a must, so is food-contact compliance "
+        "for the inks, and I want at least two production sites per vendor for continuity. Also "
+        "ask about lead time, capacity, 60-day terms, recycled content and safety stock.\n\n"
+        "Items:\n" + "\n".join(rows) + "\n"
+    )
+
+
 EXPECTED_REVIEW = {
     "meridian": [],
     "sribalaji": [
@@ -199,6 +221,8 @@ def main() -> None:
             for v in c.VENDORS
         ],
     )  # fmt: skip
+
+    (RFX_DIR / "intake_notes.txt").write_text(intake_notes(), encoding="utf-8")
 
     attachments = make_attachments.build()  # first: Anand's email embeds the certificate
     artefacts = {
