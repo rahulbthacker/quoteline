@@ -7,7 +7,16 @@ next row starts. The narration fits the scene at an unhurried pace, with a secon
 Every figure below is what is on screen in this recording. If you re-record, the readings are
 live, so read the numbers off your own screen.
 
-## How to add your voice
+## The voiced version
+
+`deliverables/quoteline-walkthrough-voiced.mp4` (7 min 5 s) already has this script on it,
+spoken by an ElevenLabs clone of Rahul's own voice. `tools/walkthrough/voice.py` places each
+clip against what is on screen, plays scenes with more picture than narration slightly faster
+(never more than 1.35x), and plays the two long waits for live model calls at 6x with a label
+on screen saying so. The exact text of each clip is in `tools/walkthrough/narration.json`.
+Rebuild it with `make voiced`.
+
+## How to record it yourself instead
 
 1. Open the video in QuickTime Player and mute it.
 2. In QuickTime: File → New Audio Recording. Press record, then start the video and read the
@@ -38,7 +47,7 @@ perfect one. iMovie works too: drop the video in and use its voiceover button.
 | 6:23 | Award. Four stat cards, the allocation, rules applied, excluded and why, the audit log. | "The award is computed by an engine, not by a model. Three point six four crore across three vendors. Six point six lakh below the best single vendor, and eight and a half percent below last year's contract. These are the rules that were applied. These are the two vendors excluded and why, and what that rule costs us: three point four lakh. The audit log has every decision I made, with my reasons." |
 | 7:13 | Send for approval, switch persona to VP, Approve, download the pack. | "I send it for approval. As the VP, I see the same page, read-only, and I can sign. Approval was blocked until the review queue was clear. The award pack downloads as a PDF." |
 | 7:34 | Run inspector: the eval panel, then the list of calls. | "How do I know the AI is right? Every model call is traced. And because we built the test files ourselves, we know the truth. Each model read ninety-nine point three percent of prices correctly. The one miss was the blotted digit, and it was flagged. Nothing wrong reached a counted cell." |
-| 7:59 | Draft → co-pilot. Buyer notes are pasted and sent; after about fifty seconds a thirty-line draft appears; the "still missing" list. | "Finally, where this starts. The buyer pastes rough notes: an item list, quantities, a few requirements. The co-pilot turns them into a structured RFx: thirty lines, a questionnaire with the three mandatory questions I named, and terms. What matters is what it does not do. It never invents a quantity or a specification. Here it has left two fields blank and listed them as missing, because my notes did not give them. Everything lands in a form I can edit before anything is sent." *(pause while the draft loads, then, over the finished draft)* "So: any format in, one grid out, every number traceable, every uncertainty resolved by a person, and an award a VP can defend." |
+| 7:59 | Draft → co-pilot. Buyer notes are pasted and sent; after about fifty seconds a thirty-line draft appears, with the questionnaire and a list of what to confirm. | "Finally, where this starts. The buyer pastes rough notes: an item list, quantities, a few requirements. The co-pilot turns them into a structured RFx, with line items, a questionnaire and terms. What matters is what it does not do. It never invents a quantity or a specification. If my notes do not give something, it leaves it blank and tells me. This also runs live, so it takes a moment." *(pause until the draft appears)* "And here is the draft. Thirty lines, the mandatory questions I named, and a list of what is still missing. Everything lands in a form I can edit before anything is sent." *(then)* "So: any format in, one grid out, every number traceable, every uncertainty resolved by a person, and an award a VP can defend." |
 | 9:25 | End card. | "One command runs all of it. Thank you." |
 
 ## If you would rather record it yourself, live

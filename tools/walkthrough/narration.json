@@ -1,0 +1,85 @@
+{
+  "voice": "Rahul's Voice (ElevenLabs clone, eleven_multilingual_v2)",
+  "clips": [
+    {
+      "key": "01",
+      "text": "This is Quoteline. We sent one R F X for corrugated packaging to five vendors: thirty lines, about three point seven crore a year. They replied in five formats, and nobody used our template. A spreadsheet in their own layout, a PDF on letterhead, a letter in prose and US dollars, a phone photo of a rate card, and a two-line email. This grid is all of them, line by line, in rupees per thousand pieces. The assumptions sit at the top. Green is the lowest price on a line. Amber needs a decision, and until I make it, that cell is in no total."
+    },
+    {
+      "key": "02",
+      "text": "Here is the same grid as each vendor wrote it: per piece, per thousand, dollars per box, per hundred, per kilo. Five units, one comparison."
+    },
+    {
+      "key": "03",
+      "text": "Every number is one click from its source. The file, the cell, what each model read, and the arithmetic. Found in file is checked by code, not by a model."
+    },
+    {
+      "key": "04",
+      "text": "This one is flagged. Both models read sixty-five cents per box. The trouble is the same sentence says, packed one hundred per bundle. Read as a piece, it is within one percent of the other vendors. Read as a bundle, it is ninety-nine times cheaper. The system computes both and does not guess. I choose per piece, and the cell counts."
+    },
+    {
+      "key": "05",
+      "text": "NorthBox sent a photo, at an angle, with an ink blot over one digit. On the left is exactly what arrived; on the right, what was read. Two models read it independently, and on that digit they disagree, so it is flagged. The same photo answers our questionnaire. NorthBox has one production site, we need two, so it fails a mandatory question, with the evidence quoted."
+    },
+    {
+      "key": "06",
+      "text": "Everything uncertain lands in one queue. Sri Balaji's footnote says four percent off lines above one lakh. As a rate, that is one line. As a line value, it is all thirty. I take the first reading. I pick the reading for the blotted digit. And Anand wrote, rest same as last year, but two lines are new this year, so there is nothing to carry forward. I treat those as not quoted."
+    },
+    {
+      "key": "07",
+      "text": "Kaveri quoted F O B Chennai and never priced freight to Pune. Instead of deciding, I ask. The system drafts the clarification: their exact words, the question, and a reply format. It is saved as a draft. Nothing is ever sent on its own."
+    },
+    {
+      "key": "08",
+      "text": "The rest I acknowledge: the dollar conversion at the RBI rate, unpriced freight carried as a condition, and lines that were simply not quoted. Not quoted is never treated as zero."
+    },
+    {
+      "key": "09",
+      "text": "The outbox shows the R F X to all five vendors, and my clarification, still a draft."
+    },
+    {
+      "key": "10",
+      "text": "Back on the grid, the banner is gone and every cell counts. If I know something the documents do not, I can override a value, but only with a reason. It is underlined, it is in the audit log, and I can revert it."
+    },
+    {
+      "key": "11",
+      "text": "Now the question a VP actually asks. If we split the award, cheapest per line, but only among vendors who cleared quality, how does that compare with giving it all to one vendor? This is not a canned report. The system writes a query for this question, runs it in a sandbox against only the cells that count, and then writes the answer from the rows that come back. It is not allowed to state a number that is not in those rows, and code checks that. This takes about a minute because it is happening live. Two model calls and one query."
+    },
+    {
+      "key": "12",
+      "text": "The split comes to three point six four crore across all thirty lines. That is six point six lakh, about one point eight percent, below the cheapest single vendor, Sri Balaji. It also warns me that freight could narrow that gap. Below the answer is what was left out, written by code. And here is the query itself, so anyone can check it. I save this as an award scenario and export it to Excel."
+    },
+    {
+      "key": "13",
+      "text": "Now one it cannot answer. Which vendor has the best on-time delivery record? We never collected that. It says so, says what data it would need, and does not answer an easier question instead."
+    },
+    {
+      "key": "14",
+      "text": "The award is computed by an engine, not by a model. Three point six four crore across three vendors. Six point six lakh below the best single vendor, and eight and a half percent below last year's contract. These are the rules that were applied. These are the two vendors excluded and why, and what that rule costs us: three point four lakh. The audit log has every decision I made, with my reasons."
+    },
+    {
+      "key": "15",
+      "text": "I send it for approval. As the VP, I see the same page, read-only, and I can sign. Approval was blocked until the review queue was clear. The award pack downloads as a PDF."
+    },
+    {
+      "key": "16",
+      "text": "How do I know the AI is right? Every model call is traced. And because we built the test files ourselves, we know the truth. Each model read ninety-nine point three percent of prices correctly. The one miss was the blotted digit, and it was flagged. Nothing wrong reached a counted cell."
+    },
+    {
+      "key": "17a",
+      "text": "Finally, where this starts. The buyer pastes rough notes: an item list, quantities, a few requirements. The co-pilot turns them into a structured R F X, with line items, a questionnaire and terms. What matters is what it does not do. It never invents a quantity or a specification. If my notes do not give something, it leaves it blank and tells me. This also runs live, so it takes a moment."
+    },
+    {
+      "key": "17b",
+      "text": "And here is the draft. Thirty lines, the mandatory questions I named, and a list of what is still missing. Everything lands in a form I can edit before anything is sent."
+    },
+    {
+      "key": "17c",
+      "text": "So: any format in, one grid out, every number traceable, every uncertainty resolved by a person, and an award a VP can defend."
+    },
+    {
+      "key": "18",
+      "text": "One command runs all of it. Thank you."
+    }
+  ]
+}
