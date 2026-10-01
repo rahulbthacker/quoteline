@@ -9,6 +9,7 @@ uncertain, asks questions in plain language, and produces an award a VP can sign
 - `docs/DESIGN.md`: architecture, the 13 design questions, traceability to the brief, decision log
 - `docs/EVAL.md`: measured accuracy against the golden set
 - `docs/WALKTHROUGH.md`: the demo script
+- `docs/VOICEOVER.md`: narration timed to the recorded walkthrough video
 - `CLAUDE.md`: the build brief
 
 ## Run it
@@ -40,6 +41,8 @@ calls fail and say so.
 | `make check-c` | Score the stored extraction and flags against the golden set | no |
 | `make check-e` | Ask the analyst six questions and check them against the award engine | yes |
 | `make eval` | Re-read the five replies, score them, run the judge, write `docs/EVAL.md` | yes |
+| `make video` | Record the silent walkthrough from the running app with Playwright, into `deliverables/` (needs ffmpeg) | yes |
+| `make voice` | Add `deliverables/voiceover.m4a` to the recorded video | no |
 | `make api` / `make web` | Development servers on :8000 and :5173 | no |
 | `make reset` | Delete all state: database, snapshots, inbox, outbox | no |
 

@@ -1,0 +1,12 @@
+{
+  "name": "quoteline-walkthrough-recorder",
+  "private": true,
+  "type": "module",
+  "description": "Drives the running app through the demo script and records a silent video for voiceover.",
+  "scripts": {
+    "record": "node record.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.63.0"
+  }
+}

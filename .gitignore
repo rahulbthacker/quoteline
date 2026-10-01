@@ -27,3 +27,8 @@ mail/inbox/*
 mail/outbox/*
 !mail/inbox/.gitkeep
 !mail/outbox/.gitkeep
+
+# walkthrough recording: the video is a deliverable, not source
+deliverables/
+tools/walkthrough/out/
+tools/walkthrough/node_modules/
